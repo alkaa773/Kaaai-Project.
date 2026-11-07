@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f4f0e8">
+<title>KAAI PROJECT.</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f0e8;--card:#fff;--text:#171717;--muted:#69665f;--border:#171717;--yellow:#f7df55;--blue:#a8d5ff;--pink:#ff9eae;--green:#b8f28b;--shadow:5px 5px 0 #171717}
+html[data-theme="dark"]{color-scheme:dark;--bg:#141414;--card:#222;--text:#f5f0e8;--muted:#b8b3aa;--border:#eee;--shadow:5px 5px 0 #000}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:110px}body{background:var(--bg);color:var(--text);font-family:"Space Grotesk",sans-serif;transition:.2s}a{color:inherit;text-decoration:none}button,input{font:inherit}button{cursor:pointer}.container{width:min(1050px,calc(100% - 28px));margin:auto}
+.top-note{padding:10px;text-align:center;background:var(--yellow);color:#171717;border-bottom:3px solid #171717;font:700 10px "Space Mono",monospace;letter-spacing:1px}
+.navbar{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:3px solid var(--border)}.nav-inner{min-height:75px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0;flex-wrap:wrap}.brand{display:flex;align-items:center;gap:10px;font-weight:700}.brand-mark{width:40px;height:40px;display:grid;place-items:center;background:var(--yellow);color:#171717;border:3px solid #171717;box-shadow:3px 3px #171717;font-size:22px;animation:float 3s infinite}@keyframes float{50%{transform:translateY(-4px) rotate(5deg)}}.command-wrap{position:relative;flex:1;min-width:0;max-width:760px;margin-left:auto}.command-form{display:flex;align-items:center;gap:8px;padding:6px;background:var(--yellow);border:3px solid #171717;box-shadow:4px 4px #171717}.command-icon{font-size:22px;color:#171717;padding:0 5px}.command-input{width:100%;min-width:0;padding:10px 8px;background:var(--bg);color:var(--text);border:2px solid #171717;outline:none;font-size:13px}.command-input:focus{outline:2px solid var(--yellow);outline-offset:1px}.command-menu{padding:9px 12px;background:#171717;color:white;border:2px solid #171717;font-size:12px;font-weight:700}.command-results{position:absolute;left:0;right:0;top:calc(100% + 10px);z-index:30;display:none;max-height:300px;overflow:auto;background:var(--card);border:3px solid var(--border);box-shadow:4px 4px var(--border)}.command-results.open{display:block}.command-option{display:flex;width:100%;align-items:center;justify-content:space-between;gap:12px;padding:13px;background:var(--card);color:var(--text);border:0;border-bottom:1px solid var(--border);text-align:left;font-weight:700;font-size:12px}.command-option:last-child{border-bottom:0}.command-option:hover,.command-option:focus{background:var(--yellow);color:#171717}.command-option small{font:10px "Space Mono",monospace;opacity:.75}
+.hero{display:grid;grid-template-columns:1.4fr .8fr;gap:20px;padding-top:38px;padding-bottom:55px}.hero-main{position:relative;min-height:320px;display:flex;flex-direction:column;justify-content:center;padding:35px;overflow:hidden;background:var(--yellow);color:#171717;border:3px solid #171717;box-shadow:var(--shadow)}.eyebrow,.section-no,.feature-label,.tag{font:700 10px "Space Mono",monospace}.eyebrow{width:fit-content;background:#171717;color:white;padding:8px;margin-bottom:25px}.hero h1{position:relative;z-index:1;font-size:clamp(54px,9vw,94px);line-height:.88;letter-spacing:-5px}.hero h1 span{color:white;-webkit-text-stroke:2px #171717;text-shadow:4px 4px #171717}.hero-symbol{position:absolute;right:18px;top:18px;font-size:70px;animation:spin 12s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.hero-side{display:grid;gap:15px}.side-card{padding:20px;border:3px solid #171717;box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:space-between;gap:15px;color:#171717}.side-card.blue{background:var(--blue)}.side-card.pink{background:var(--pink)}.side-card h3{font-size:27px;line-height:1}.side-card p{font-size:12px;margin-top:8px}
+.section{padding:48px 0;border-top:3px solid var(--border)}.section-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:25px}.section-no{color:var(--muted);margin-bottom:10px}.section-title{font-size:clamp(35px,6vw,57px);letter-spacing:-3px;line-height:1}.section-description{max-width:320px;font-size:13px;color:var(--muted);line-height:1.7}.panel{padding:25px;background:var(--green);color:#171717;border:3px solid #171717;box-shadow:var(--shadow)}.panel.blue{background:var(--blue)}.panel.pink{background:var(--pink)}.panel h3{font-size:clamp(24px,4vw,35px);margin:12px 0}.panel p{font-size:13px;line-height:1.7;margin-bottom:18px}.button{display:inline-flex;align-items:center;justify-content:center;padding:13px 16px;background:#171717;color:white;border:3px solid #171717;box-shadow:4px 4px #171717;font-size:11px;font-weight:700;transition:.15s}.button:hover{transform:translate(-2px,-2px);box-shadow:6px 6px #171717}
+.tiktok-card{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:22px;background:var(--card);border:3px solid var(--border);box-shadow:var(--shadow)}.tiktok-profile{display:flex;align-items:center;gap:14px;min-width:0}.tiktok-avatar{width:70px;height:70px;object-fit:cover;border-radius:50%;background:var(--yellow);border:3px solid var(--border)}.tiktok-info h3{margin:5px 0;font-size:22px;overflow-wrap:anywhere}.tiktok-info p{font-size:12px;color:var(--muted)}.tiktok-button{padding:13px 16px;background:var(--yellow);color:#171717;border:3px solid #171717;box-shadow:4px 4px #171717;font-size:11px;font-weight:700;white-space:nowrap}
+.search-box{width:100%;padding:14px;margin-bottom:20px;background:var(--card);color:var(--text);border:3px solid var(--border);outline:none}.game-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}.game-card{display:flex;flex-direction:column;min-width:0;background:var(--card);border:3px solid var(--border);box-shadow:4px 4px var(--border)}.game-art{min-height:115px;padding:20px;display:flex;align-items:center;justify-content:space-between;color:#171717;border-bottom:3px solid #171717}.yellow{background:var(--yellow)}.blue-bg{background:var(--blue)}.pink-bg{background:var(--pink)}.game-icon{font-size:43px}.game-content{flex:1;display:flex;flex-direction:column;align-items:flex-start;padding:18px}.game-content h3{font-size:21px;margin-bottom:10px}.game-content p{flex:1;color:var(--muted);font-size:12px;line-height:1.7;margin-bottom:18px}.game-content .button{width:100%;text-align:center}.empty-result{display:none;padding:15px;color:var(--muted)}
+.about-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:18px}.about-badge,.about-copy{padding:24px;border:3px solid var(--border);box-shadow:var(--shadow)}.about-badge{background:var(--pink);color:#171717;display:flex;flex-direction:column;justify-content:space-between;min-height:200px}.about-badge strong{font-size:70px}.about-copy{background:var(--card)}.about-copy h3{margin-bottom:12px}.about-copy p{font-size:13px;line-height:1.8;color:var(--muted);margin-bottom:10px}
+.music-player{position:relative;z-index:2;padding:22px;background:var(--card);border:3px solid var(--border);box-shadow:var(--shadow);touch-action:manipulation}.now-playing{display:flex;align-items:center;gap:15px;padding-bottom:20px;border-bottom:2px solid var(--border)}.album-art{width:76px;height:76px;flex-shrink:0;display:grid;place-items:center;background:var(--yellow);color:#171717;border:3px solid #171717;font-size:35px}.now-label{font:700 10px "Space Mono",monospace;color:var(--muted)}.now-title{font-size:20px;font-weight:700;margin-top:5px;overflow-wrap:anywhere}.now-artist{font-size:12px;color:var(--muted);margin-top:4px}.music-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:18px 0}.music-btn{position:relative;z-index:3;min-width:46px;min-height:44px;padding:10px 13px;background:var(--yellow);color:#171717;border:2px solid #171717;font-weight:700;cursor:pointer;touch-action:manipulation;pointer-events:auto}.music-btn.primary{background:#171717;color:white}.progress-wrap{display:flex;align-items:center;gap:10px;width:100%;font:10px "Space Mono",monospace}.progress-wrap input{flex:1;min-width:0;accent-color:#e7bd00}.volume-wrap{display:flex;align-items:center;gap:8px;font-size:12px}.volume-wrap input{width:85px;accent-color:#e7bd00}.track-list{display:grid;gap:8px;margin-top:5px}.track{position:relative;z-index:3;width:100%;min-height:48px;display:flex;align-items:center;gap:12px;padding:13px;background:var(--bg);color:var(--text);border:2px solid var(--border);text-align:left;cursor:pointer;touch-action:manipulation;pointer-events:auto}.track.active{background:var(--yellow);color:#171717;box-shadow:3px 3px #171717}.track-number{font:700 11px "Space Mono",monospace}.track-name{flex:1;font-weight:700;font-size:13px}.track-state{font-size:11px}.music-note{margin-top:15px;color:var(--muted);font-size:11px;line-height:1.7}
+.footer{margin-top:20px;padding:27px 0;background:var(--yellow);color:#171717;border-top:3px solid #171717}.footer-inner{display:flex;justify-content:space-between;flex-wrap:wrap;gap:15px}.footer-brand{font-size:24px;font-weight:700}.footer-credit{font:700 10px "Space Mono",monospace}.footer-small{width:100%;border-top:2px solid #171717;padding-top:15px;font:10px "Space Mono",monospace}
+@media(max-width:800px){.hero{grid-template-columns:1fr}.hero-main{min-height:275px}.hero-side{grid-template-columns:1fr 1fr}.game-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.nav-inner{align-items:stretch;flex-direction:column}.command-wrap{width:100%;max-width:none;margin:0}}
+@media(max-width:540px){.command-form{gap:5px;padding:5px}.command-input{font-size:12px;padding:10px 6px}.command-menu{padding:8px 10px}.hero-main{padding:24px}.hero h1{font-size:clamp(48px,13vw,72px);letter-spacing:-4px}.hero-symbol{font-size:52px}.side-card{padding:14px}.side-card h3{font-size:20px}.section{padding:38px 0}.section-heading{align-items:flex-start;flex-direction:column}.game-grid,.about-grid{grid-template-columns:1fr}.tiktok-card{align-items:flex-start;flex-direction:column}.tiktok-button{width:100%;text-align:center}.footer-inner{flex-direction:column}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important}}
+
+.user-profile{display:grid;grid-template-columns:180px 1fr;gap:24px;align-items:start;padding:24px;background:var(--card);border:3px solid var(--border);box-shadow:var(--shadow)}.profile-preview{display:flex;flex-direction:column;align-items:center;gap:12px}.profile-avatar{width:136px;height:136px;object-fit:cover;border:3px solid var(--border);background:var(--yellow);border-radius:50%;box-shadow:4px 4px var(--border)}.profile-avatar-fallback{display:grid;place-items:center;font-size:54px;font-weight:700;color:#171717}.profile-fields{display:grid;gap:12px}.profile-fields label{font:700 10px "Space Mono",monospace}.profile-fields input[type="text"],.profile-fields input[type="file"]{width:100%;padding:12px;background:var(--bg);color:var(--text);border:2px solid var(--border)}.profile-note,.profile-status{font-size:12px;color:var(--muted);line-height:1.7}.profile-status{padding:12px;background:var(--bg);border:2px solid var(--border);overflow-wrap:anywhere}.profile-public-title{margin-top:24px;font-size:18px}.profile-public-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-top:12px}.public-profile-card{display:flex;align-items:center;gap:12px;min-width:0;padding:12px;background:var(--card);border:2px solid var(--border)}.public-profile-avatar{width:48px;height:48px;flex-shrink:0;object-fit:cover;border:2px solid var(--border);border-radius:50%;background:var(--yellow)}.public-profile-name{font-weight:700;overflow-wrap:anywhere}.public-profile-id{font:9px "Space Mono",monospace;color:var(--muted);margin-top:4px}.music-search{display:flex;gap:10px;align-items:stretch;margin-bottom:22px}.music-search .search-box{flex:1;min-width:0;margin:0}.music-search button{white-space:nowrap}.now-meta{min-width:0}.album-art{overflow:hidden}.album-art img{width:100%;height:100%;object-fit:cover}.music-external{display:inline-block;margin-top:8px;font:700 10px "Space Mono",monospace;text-decoration:underline;text-underline-offset:3px}.music-results-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:12px 0;font:700 10px "Space Mono",monospace}.music-results-heading span{color:var(--muted);font-weight:400;text-align:right}.track{gap:10px}.track-cover{width:48px;height:48px;flex-shrink:0;object-fit:cover;background:var(--yellow);border:2px solid var(--border)}.track-copy{flex:1;min-width:0}.track-name{display:block;overflow-wrap:anywhere}.track-artist{display:block;margin-top:4px;font-size:11px;opacity:.75;overflow-wrap:anywhere}.track-state{flex-shrink:0}.music-empty{padding:16px;border:2px dashed var(--border);color:var(--muted);font-size:12px;line-height:1.6}.music-btn:disabled{opacity:.45;cursor:not-allowed}.music-search .search-box:focus{outline:3px solid var(--yellow);outline-offset:2px}
+.auth-panel{margin-bottom:22px;padding:20px;background:var(--card);border:3px solid var(--border);box-shadow:var(--shadow)}.auth-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.auth-field{display:grid;gap:7px;font:700 10px "Space Mono",monospace}.auth-field input{width:100%;padding:12px;background:var(--bg);color:var(--text);border:2px solid var(--border);font:14px "Space Grotesk",sans-serif}.auth-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.auth-status{margin-top:12px;padding:10px;background:var(--bg);border:2px solid var(--border);font-size:12px;line-height:1.6;color:var(--muted);overflow-wrap:anywhere}.auth-session{font-size:12px;margin-bottom:12px;color:var(--muted)}@media(max-width:540px){.auth-grid{grid-template-columns:1fr}}
+.role-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;background:var(--yellow);color:#171717;border:2px solid #171717;box-shadow:2px 2px #171717;font:700 10px "Space Mono",monospace;letter-spacing:.3px}.profile-role-wrap{min-height:24px;display:flex;justify-content:center}.public-profile-meta{min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:5px}.public-profile-card .role-badge{font-size:9px;padding:4px 6px;box-shadow:1px 1px #171717}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s cubic-bezier(.2,.7,.2,1)}.reveal.is-visible{opacity:1;transform:translateY(0)}
+@media(max-width:540px){.music-search{flex-direction:column}.music-search button{width:100%}.track-cover{width:42px;height:42px}.music-results-heading{align-items:flex-start;flex-direction:column;gap:5px}}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+
+/* KAAI voting section: keeps the existing neo-brutalist visual language */
+.vote-layout{display:grid;grid-template-columns:1.25fr .75fr;gap:18px;align-items:start}
+.vote-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.vote-card{padding:18px;background:var(--card);border:3px solid var(--border);box-shadow:4px 4px var(--border);display:flex;flex-direction:column;gap:10px;min-width:0}
+.vote-card h3{font-size:19px;line-height:1.15;overflow-wrap:anywhere}
+.vote-card p{font-size:12px;line-height:1.6;color:var(--muted);flex:1}
+.vote-count{font:700 11px "Space Mono",monospace;background:var(--yellow);color:#171717;padding:7px 9px;width:fit-content;border:2px solid #171717}
+.vote-card .button{width:100%;cursor:pointer}
+.vote-card .button:disabled,.vote-admin button:disabled{opacity:.5;cursor:not-allowed}
+.vote-status{padding:13px;border:2px solid var(--border);background:var(--card);font-size:12px;line-height:1.6;margin-top:14px;overflow-wrap:anywhere}
+.vote-admin{padding:20px;background:var(--blue);color:#171717;border:3px solid #171717;box-shadow:var(--shadow)}
+.vote-admin h3{font-size:22px;margin-bottom:10px}
+.vote-admin p{font-size:12px;line-height:1.6;margin-bottom:14px}
+.vote-admin input,.vote-admin select,.vote-admin textarea{display:block;width:100%;padding:12px;margin:8px 0;background:white;color:#171717;border:2px solid #171717;border-radius:0}
+.vote-admin textarea{min-height:80px;resize:vertical}
+.vote-admin .button{width:100%;margin-top:7px}
+.vote-announcement{padding:18px;margin-bottom:16px;background:var(--green);color:#171717;border:3px solid #171717;box-shadow:var(--shadow)}
+.vote-announcement h3{font-size:22px;margin:8px 0}
+.vote-small{font:700 10px "Space Mono",monospace}
+@media(max-width:800px){.vote-layout{grid-template-columns:1fr}}
+@media(max-width:540px){.vote-list{grid-template-columns:1fr}.vote-card{padding:15px}}
+
+
+/* Global community chat */
+.chat-shell{display:grid;grid-template-columns:1fr;gap:14px;padding:18px;background:var(--card);border:3px solid var(--border);box-shadow:var(--shadow)}.chat-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.chat-online{font:700 10px "Space Mono",monospace;color:var(--muted)}.chat-log{height:360px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding:12px;background:var(--bg);border:2px solid var(--border);overscroll-behavior:contain}.chat-message{max-width:92%;padding:10px 12px;border:2px solid var(--border);background:var(--card);overflow-wrap:anywhere}.chat-message.mine{align-self:flex-end;background:var(--yellow);color:#171717}.chat-message-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;font-weight:700}.chat-message-head img{width:25px;height:25px;border-radius:50%;object-fit:cover;border:1px solid var(--border)}.chat-message-time{font:9px "Space Mono",monospace;color:var(--muted)}.chat-message.mine .chat-message-time{color:#555}.chat-message-body{margin-top:6px;font-size:13px;line-height:1.55;white-space:pre-wrap}.chat-reactions{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}.chat-reaction{border:1.5px solid var(--border);background:var(--bg);color:var(--text);padding:4px 8px;font-size:12px;cursor:pointer;border-radius:999px}.chat-reaction.active{background:var(--yellow);color:#171717;font-weight:800}.chat-reaction:disabled{opacity:.55;cursor:wait}.chat-tools{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:10px;color:var(--muted)}.chat-count{font:10px "Space Mono",monospace}.chat-compose{display:grid;grid-template-columns:1fr auto;gap:9px}.chat-compose textarea{width:100%;min-height:48px;max-height:120px;resize:vertical;padding:12px;background:var(--bg);color:var(--text);border:2px solid var(--border)}.chat-compose button{min-width:100px}.chat-hint,.chat-status{font-size:11px;line-height:1.6;color:var(--muted)}.chat-empty{margin:auto;text-align:center;font-size:12px;color:var(--muted);padding:24px}
+@media(max-width:540px){.user-profile{grid-template-columns:1fr}.chat-log{height:320px}.chat-compose{grid-template-columns:1fr}.chat-compose button{width:100%}}
+
+
+.announcement-feed{display:grid;gap:14px}.announcement-card{padding:22px;background:var(--yellow);color:#171717;border:3px solid #171717;box-shadow:var(--shadow);overflow-wrap:anywhere}.announcement-card h3{font-size:clamp(22px,4vw,32px);margin:10px 0}.announcement-card p{line-height:1.7;font-size:14px;white-space:pre-wrap}.announcement-card small{display:block;margin-top:14px;font:10px "Space Mono",monospace}.announcement-admin{margin-top:22px;padding:20px;background:var(--card);border:3px solid var(--border);box-shadow:var(--shadow)}.announcement-admin h3{font-size:24px;margin:8px 0 15px}.announcement-admin label{display:block;margin:12px 0 6px;font:700 10px "Space Mono",monospace}.announcement-admin input,.announcement-admin textarea{width:100%;padding:12px;background:var(--bg);color:var(--text);border:2px solid var(--border);margin-bottom:8px}.announcement-admin textarea{min-height:120px;resize:vertical}.announcement-empty{padding:18px;border:2px dashed var(--border);color:var(--muted)}
+
+
+/* Global announcement popup notification */
+.announcement-popup-backdrop{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.68);backdrop-filter:blur(4px)}.announcement-popup-backdrop[hidden]{display:none!important}.announcement-popup{position:relative;width:min(100%,440px);max-height:min(82vh,680px);overflow:auto;background:var(--card);color:var(--text);border:3px solid var(--border);box-shadow:9px 9px 0 var(--yellow);padding:22px;animation:announcementPopIn .24s ease-out}.announcement-popup-head{display:flex;align-items:center;gap:12px;margin-bottom:18px;padding-right:32px}.announcement-popup-icon{width:44px;height:44px;display:grid;place-items:center;flex-shrink:0;background:var(--yellow);color:#171717;border:2px solid #171717;font-size:23px}.announcement-popup-kicker{font:700 10px "Space Mono",monospace;letter-spacing:.08em;color:var(--muted)}.announcement-popup-title{font-size:clamp(22px,6vw,30px);line-height:1.15;margin:10px 0 12px;overflow-wrap:anywhere}.announcement-popup-message{font-size:14px;line-height:1.7;white-space:pre-wrap;overflow-wrap:anywhere}.announcement-popup-date{font:10px "Space Mono",monospace;color:var(--muted);margin-top:16px}.announcement-popup-close{position:absolute;top:12px;right:12px;width:36px;height:36px;background:var(--bg);color:var(--text);border:2px solid var(--border);font-size:22px;cursor:pointer}.announcement-popup-action{width:100%;margin-top:20px;padding:13px;background:var(--yellow);color:#171717;border:2px solid #171717;font-weight:900;cursor:pointer}.announcement-popup-action:active{transform:translate(2px,2px)}@keyframes announcementPopIn{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}@media(prefers-reduced-motion:reduce){.announcement-popup{animation:none}}
+
+
+/* KAAA PROJECT — Liquid Glass floating navigation */
+#kaaiGlassNav{
+  position:fixed;left:50%;bottom:max(18px,env(safe-area-inset-bottom));transform:translateX(-50%);
+  z-index:9998;display:flex;align-items:center;gap:5px;padding:7px;
+  width:min(390px,calc(100% - 28px));justify-content:space-between;
+  border:1px solid rgba(255,255,255,.42);border-radius:24px;
+  background:rgba(245,245,250,.58);
+  box-shadow:0 12px 38px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.72);
+  -webkit-backdrop-filter:blur(24px) saturate(180%);backdrop-filter:blur(24px) saturate(180%);
+}
+html[data-theme="dark"] #kaaiGlassNav{
+  background:rgba(35,37,44,.62);border-color:rgba(255,255,255,.16);
+  box-shadow:0 12px 38px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.14)
+}
+#kaaiGlassNav a,#kaaiGlassNav button{
+  appearance:none;flex:1;min-width:0;min-height:54px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:3px;border:0;border-radius:17px;
+  background:transparent;color:#555766;font:600 10px "Space Grotesk",sans-serif;
+  cursor:pointer;transition:background .22s ease,color .22s ease,transform .22s ease;
+  -webkit-tap-highlight-color:transparent
+}
+html[data-theme="dark"] #kaaiGlassNav a,html[data-theme="dark"] #kaaiGlassNav button{color:#d0d2dc}
+#kaaiGlassNav .glass-icon{font-size:19px;line-height:1}
+#kaaiGlassNav a.active,#kaaiGlassNav button:active{
+  color:#fff;background:linear-gradient(145deg,#438cff,#1764e8);
+  box-shadow:0 5px 14px rgba(35,111,240,.34),inset 0 1px 0 rgba(255,255,255,.4)
+}
+#kaaiGlassNav a:focus-visible,#kaaiGlassNav button:focus-visible{outline:2px solid #438cff;outline-offset:2px}
+body{padding-bottom:95px}
+@media(max-width:420px){#kaaiGlassNav{bottom:max(12px,env(safe-area-inset-bottom));padding:6px}#kaaiGlassNav a,#kaaiGlassNav button{min-height:50px;font-size:9px}}
+@media(prefers-reduced-motion:reduce){#kaaiGlassNav a,#kaaiGlassNav button{transition:none}}
+
+
+#kaaiProfilePanel{position:fixed;right:max(14px,calc((100vw - 390px)/2));bottom:calc(max(18px,env(safe-area-inset-bottom)) + 76px);z-index:9999;width:min(270px,calc(100vw - 36px));padding:9px;border:1px solid rgba(255,255,255,.48);border-radius:22px;background:rgba(246,247,251,.76);box-shadow:0 16px 44px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.8);-webkit-backdrop-filter:blur(26px) saturate(180%);backdrop-filter:blur(26px) saturate(180%);opacity:0;visibility:hidden;transform:translateY(10px) scale(.97);transform-origin:bottom right;transition:opacity .2s ease,transform .2s ease,visibility .2s}
+#kaaiProfilePanel.open{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+html[data-theme="dark"] #kaaiProfilePanel{background:rgba(35,37,44,.82);border-color:rgba(255,255,255,.17)}
+#kaaiProfilePanel .profile-head{padding:12px 13px 14px;border-bottom:1px solid rgba(120,120,140,.2);margin-bottom:6px}
+#kaaiProfilePanel .profile-title{font-size:14px;font-weight:800;color:inherit}
+#kaaiProfilePanel .profile-sub{font-size:11px;opacity:.65;margin-top:3px}
+#kaaiProfilePanel a{display:flex;align-items:center;gap:11px;padding:12px 13px;border-radius:14px;color:inherit;text-decoration:none;font-size:13px;font-weight:650}
+#kaaiProfilePanel a:active{background:rgba(70,130,240,.15)}
+#kaaiProfilePanel .profile-symbol{width:30px;height:30px;display:grid;place-items:center;border-radius:10px;background:rgba(90,130,220,.13);font-size:16px}
+@media(prefers-reduced-motion:reduce){#kaaiProfilePanel{transition:none}}
+
+
+/* Business profile sheet */
+#kaaiProfilePanel button.profile-open{display:flex;align-items:center;gap:11px;width:100%;padding:12px 13px;border:0;border-radius:14px;background:rgba(70,130,240,.13);color:inherit;font:650 13px "Space Grotesk",sans-serif;text-align:left;cursor:pointer;margin-bottom:4px}
+#kaaiProfilePanel button.profile-open:active{background:rgba(70,130,240,.25)}
+#bizSheet{position:fixed;inset:0;z-index:2147483002;display:flex;justify-content:center;background:#0b0f14;color:#e9edef;overflow-y:auto;overscroll-behavior:contain;opacity:0;visibility:hidden;transform:translateY(24px);transition:opacity .22s ease,transform .22s ease,visibility .22s;font-family:"Space Grotesk",sans-serif}
+#bizSheet.open{opacity:1;visibility:visible;transform:none}
+#bizSheet .biz-col{width:min(560px,100%);padding-bottom:max(32px,env(safe-area-inset-bottom))}
+#bizSheet .biz-cover{position:relative;height:210px;background:#000;border-bottom:1px solid #1f262d;overflow:hidden}
+#bizSheet .biz-cover svg{position:absolute;inset:0;width:100%;height:100%}
+#bizSheet .biz-back{position:absolute;top:max(14px,env(safe-area-inset-top));left:12px;z-index:2;width:44px;height:44px;display:grid;place-items:center;border:0;border-radius:50%;background:rgba(0,0,0,.45);color:#fff;cursor:pointer}
+#bizSheet .biz-back:focus-visible,#bizSheet .biz-row a:focus-visible{outline:2px solid #25d366;outline-offset:2px}
+#bizSheet .biz-avatar{display:block;width:132px;height:132px;margin:-66px auto 0;position:relative;border-radius:50%;object-fit:cover;background:#f7df55;border:4px solid #0b0f14;box-shadow:0 0 0 2px #2a323a}
+#bizSheet .biz-name{display:flex;align-items:center;justify-content:center;gap:8px;margin:16px 16px 26px;font-size:24px;font-weight:500;text-align:center;overflow-wrap:anywhere}
+#bizSheet .biz-name svg{flex-shrink:0;color:#8a959e}
+#bizSheet .biz-row{display:grid;grid-template-columns:28px 1fr;gap:18px;padding:14px 20px}
+#bizSheet .biz-row>svg{margin-top:2px;color:#8a959e}
+#bizSheet .biz-val{font-size:16px;line-height:1.35;overflow-wrap:anywhere;white-space:pre-line}
+#bizSheet .biz-val a{color:inherit;text-decoration:none}
+#bizSheet .biz-val a:hover{text-decoration:underline}
+#bizSheet .biz-lab{margin-top:3px;font-size:13.5px;color:#8a959e}
+#bizSheet .biz-hours{display:grid;gap:12px;font-size:16px}
+#bizSheet .biz-hours div{display:flex;justify-content:space-between;gap:16px}
+#bizSheet .biz-hours .today{font-weight:700;color:#25d366}
+
+#bizSheet .biz-editbtn{position:absolute;top:max(14px,env(safe-area-inset-top));right:12px;z-index:2;min-height:44px;padding:0 16px;border:0;border-radius:22px;background:rgba(0,0,0,.45);color:#fff;font:600 14px "Space Grotesk",sans-serif;cursor:pointer}
+#bizSheet .biz-editbtn[hidden]{display:none}
+#bizSheet .biz-empty{padding:8px 24px;color:#8a959e;text-align:center;line-height:1.6}
+#bizSheet .biz-form{display:grid;gap:6px;padding:4px 20px}
+#bizSheet .biz-form[hidden]{display:none}
+#bizSheet .biz-form label{margin-top:8px;font-size:13.5px;color:#8a959e}
+#bizSheet .biz-form input[type=text],#bizSheet .biz-form textarea{width:100%;padding:12px;border:1px solid #2a323a;border-radius:10px;background:#151b22;color:#e9edef;font:16px "Space Grotesk",sans-serif;resize:vertical}
+#bizSheet .biz-form input:focus,#bizSheet .biz-form textarea:focus{outline:2px solid #25d366;outline-offset:1px}
+#bizSheet .biz-form label.biz-photo{align-self:start;margin:0 0 4px;padding:10px 16px;border:1px solid #2a323a;border-radius:22px;color:#25d366;font-weight:600;cursor:pointer}
+#bizSheet .biz-hint,#bizSheet .biz-status{font-size:12.5px;line-height:1.6;color:#8a959e;margin-top:6px}
+#bizSheet .biz-actions{display:flex;gap:10px;margin-top:10px}
+#bizSheet .biz-actions button{flex:1;min-height:48px;border-radius:24px;font:700 15px "Space Grotesk",sans-serif;cursor:pointer}
+#bizSheet .biz-save{border:0;background:#25d366;color:#07140c}
+#bizSheet .biz-ghost{border:1px solid #2a323a;background:transparent;color:#e9edef}
+#bizSheet .biz-actions button:disabled{opacity:.5;cursor:wait}
+@media(prefers-reduced-motion:reduce){#bizSheet{transition:none}}
+</style>
+</head>
+<body>
+
+<div class="announcement-popup-backdrop" id="announcementPopupBackdrop" hidden role="presentation">
+  <section class="announcement-popup" role="dialog" aria-modal="true" aria-labelledby="announcementPopupTitle" aria-describedby="announcementPopupMessage">
+    <button type="button" class="announcement-popup-close" id="announcementPopupClose" aria-label="Tutup pengumuman">×</button>
+    <div class="announcement-popup-head"><div class="announcement-popup-icon" aria-hidden="true">✦</div><div><div class="announcement-popup-kicker">KAAA PROJECT</div><div class="announcement-popup-kicker">DEVELOPER ANNOUNCEMENT</div></div></div>
+    <h2 class="announcement-popup-title" id="announcementPopupTitle">Pengumuman terbaru</h2>
+    <div class="announcement-popup-message" id="announcementPopupMessage"></div>
+    <div class="announcement-popup-date" id="announcementPopupDate"></div>
+    <button type="button" class="announcement-popup-action" id="announcementPopupOk">MENGERTI ✓</button>
+  </section>
+</div>
+
+<div class="top-note">INDEPENDENT PROJECT HUB — MADE FOR THE COMMUNITY</div>
+<header class="navbar"><div class="container nav-inner">
+<a href="#home" class="brand"><span class="brand-mark">K</span>KAAI PROJECT.</a>
+<div class="command-wrap" role="search">
+<form class="command-form" id="commandForm" autocomplete="off"><span class="command-icon" aria-hidden="true">⌕</span><input class="command-input" id="commandInput" type="search" placeholder="Search command..." aria-label="Cari halaman atau fitur" aria-controls="commandResults" aria-expanded="false"><button class="command-menu" type="button" id="commandMenu" aria-label="Tampilkan semua perintah">☰</button></form>
+<div class="command-results" id="commandResults" role="listbox" aria-label="Hasil command"></div>
+</div></div></header>
+<main>
+<section class="container hero" id="home"><div class="hero-main"><div class="eyebrow">WELCOME TO THE HUB ✳</div><div class="hero-symbol">✳</div><h1>KAAI<br><span>PROJECT.</span></h1></div><div class="hero-side"><a href="#games" class="side-card blue"><small>01 / EXPLORE</small><div><h3>LINK<br>GAME.</h3><p>Temukan link game dan layanan.</p></div><b>↗</b></a><a href="#music" class="side-card pink"><small>02 / LISTEN</small><div><h3>YOUR<br>SOUNDTRACK.</h3><p>Putar musik favoritmu.</p></div><b>♫</b></a></div></section>
+
+<section class="section" id="saluran"><div class="container"><div class="section-heading"><div><div class="section-no">01 — COMMUNITY</div><h2 class="section-title">SALURAN.</h2></div><p class="section-description">Update komunitas dalam satu tempat.</p></div><div class="panel"><div class="feature-label">WHATSAPP CHANNEL</div><h3>Kaaa? | Web Dev</h3><p>Kunjungi saluran untuk melihat update terbaru.</p><a class="button" href="https://whatsapp.com/channel/0029Vb8UAO4ATRSkXrMk9i0k" target="_blank" rel="noopener noreferrer">JOIN CHANNEL ↗</a></div></div></section>
+<section class="section" id="tiktok"><div class="container"><div class="section-heading"><div><div class="section-no">02 — FIND ME ONLINE</div><h2 class="section-title">MY TIKTOK.</h2></div><p class="section-description">Follow akun TikTok KAAI PROJECT.</p></div><div class="tiktok-card"><div class="tiktok-profile"><img class="tiktok-avatar" src="https://unavatar.io/tiktok/kaa.vk0" alt="Foto profil @kaa.vk0" onerror="this.onerror=null;this.src='https://placehold.co/200x200/f7df55/171717?text=K'"><div class="tiktok-info"><small>✳ CREATOR PROFILE</small><h3>@kaa.vk0</h3><p>TikTok Creator · KAAI PROJECT</p></div></div><a class="tiktok-button" href="https://www.tiktok.com/@kaa.vk0" target="_blank" rel="noopener noreferrer">FOLLOW ↗</a></div></div></section>
+<section class="section" id="music"><div class="container"><div class="section-heading"><div><div class="section-no">03 — YOUR SOUNDTRACK</div><h2 class="section-title">MUSIC PLAYER.</h2></div><p class="section-description">Cari judul lagu atau nama artis, lalu putar preview yang tersedia.</p></div>
+<div class="music-player">
+<form class="music-search" id="musicSearchForm" role="search"><input id="musicSearchInput" class="search-box" type="search" placeholder="Cari lagu atau artis apa pun..." aria-label="Cari lagu atau artis" autocomplete="off" required><button class="music-btn primary" id="musicSearchBtn" type="submit">⌕ SEARCH</button></form>
+<div class="now-playing"><div class="album-art" id="albumArt">♫</div><div class="now-meta"><div class="now-label">NOW PLAYING</div><div class="now-title" id="nowTitle">Cari lagu untuk mulai</div><div class="now-artist" id="nowArtist">KAAI MUSIC SEARCH</div><a class="music-external" id="openSpotify" href="https://open.spotify.com/" target="_blank" rel="noopener noreferrer">OPEN IN SPOTIFY ↗</a></div></div>
+<audio id="audioPlayer" preload="none" playsinline></audio>
+<div class="music-controls"><button class="music-btn" id="prevBtn" type="button" aria-label="Lagu sebelumnya">◀|</button><button class="music-btn primary" id="playBtn" type="button">▶ PLAY</button><button class="music-btn" id="nextBtn" type="button" aria-label="Lagu berikutnya">|▶</button><label class="volume-wrap">VOL <input id="volumeSlider" type="range" min="0" max="1" step="0.05" value="0.8"></label><div class="progress-wrap"><span id="currentTime">0:00</span><input id="progressSlider" type="range" min="0" max="100" value="0" step="0.1" aria-label="Posisi lagu"><span id="duration">0:00</span></div></div>
+<div class="music-results-heading"><strong>SEARCH RESULTS</strong><span id="musicResultCount">Belum ada pencarian</span></div><div class="track-list" id="trackList" aria-live="polite"><p class="music-empty">Ketik judul lagu atau nama artis di atas untuk mencari musik.</p></div>
+<p class="music-note" id="musicNote">Pencarian memakai katalog musik publik. Preview hanya tersedia untuk lagu yang menyediakan cuplikan; gunakan tautan Spotify untuk mendengarkan versi lengkap.</p>
+</div></div></section>
+<section class="section" id="profile"><div class="container"><div class="section-heading"><div><div class="section-no">04 — COMMUNITY IDENTITY</div><h2 class="section-title">YOUR PROFILE.</h2></div><p class="section-description">Buat nama tampilan dan unggah foto profil. Profil publik bisa dilihat pengunjung lain.</p></div>
+<div class="auth-panel" id="accountAuthPanel">
+<div class="vote-small">ACCOUNT ACCESS / SUPABASE AUTH</div><h3 style="font-size:24px;margin:8px 0">MEMBER LOGIN.</h3><p class="profile-note" style="margin-bottom:14px">Daftar atau masuk memakai email dan password. Login Developer memerlukan akun pemilik yang sudah terdaftar di Supabase dan role Developer resmi.</p>
+<div class="auth-grid"><label class="auth-field" for="accountEmail">EMAIL<input id="accountEmail" type="email" autocomplete="email" placeholder="nama@email.com" required></label><label class="auth-field" for="accountPassword">PASSWORD<input id="accountPassword" type="password" autocomplete="current-password" minlength="6" placeholder="Minimal 6 karakter" required></label></div>
+<div class="auth-actions"><button class="button" id="accountSignIn" type="button">LOGIN ↗</button><button class="button" id="accountSignUp" type="button">CREATE ACCOUNT +</button><button class="button" id="developerSignIn" type="button">DEVELOPER LOGIN ✦</button><button class="button" id="accountSignOut" type="button" hidden>LOG OUT</button></div>
+<div class="auth-status" id="accountAuthStatus" role="status" aria-live="polite">Menghubungkan ke Supabase Authentication…</div></div>
+<div class="user-profile"><div class="profile-preview"><img id="profileAvatarPreview" class="profile-avatar profile-avatar-fallback" src="https://placehold.co/300x300/f7df55/171717?text=K" alt="Foto profil pengguna"><label class="button" for="profileAvatarFile">CHANGE PHOTO ↗</label><div class="profile-role-wrap" id="myRoleBadge" aria-live="polite"></div><input id="profileAvatarFile" type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden></div><form id="profileForm" class="profile-fields"><label for="profileDisplayName">DISPLAY NAME</label><input id="profileDisplayName" type="text" maxlength="32" placeholder="Nama yang terlihat oleh orang lain" required><p class="profile-note">Format foto: JPG, PNG, WEBP, atau GIF. Maksimum 3 MB. Gunakan gambar yang kamu punya hak untuk gunakan.</p><button class="button" id="saveProfileBtn" type="submit">SAVE PROFILE ↗</button><div class="profile-status" id="profileStatus" role="status" aria-live="polite">Menghubungkan profil...</div></form></div>
+<h3 class="profile-public-title">COMMUNITY PROFILES.</h3><div id="publicProfiles" class="profile-public-list"><p class="profile-note">Memuat profil komunitas...</p></div></div></section>
+
+<section class="section" id="global-chat"><div class="container"><div class="section-heading"><div><div class="section-no">05 — LIVE COMMUNITY</div><h2 class="section-title">GLOBAL CHAT.</h2></div><p class="section-description">Ngobrol bareng semua pengunjung. Username dan foto mengikuti Community Profile kamu.</p></div>
+<div class="chat-shell"><div class="chat-top"><strong>✳ KAAA COMMUNITY ROOM</strong><span class="chat-online" id="chatIdentity">Menghubungkan profil…</span></div><div class="chat-log" id="chatLog" role="log" aria-live="polite"><p class="chat-empty">Memuat percakapan…</p></div><form class="chat-compose" id="chatForm"><textarea id="chatInput" maxlength="500" placeholder="Tulis pesan… (maks. 500 karakter)" aria-label="Pesan chat" required></textarea><button class="button" id="chatSendBtn" type="submit">SEND ↗</button></form><div class="chat-tools"><span>REAKSI CEPAT: klik emoji di bawah pesan</span><span class="chat-count" id="chatCount">0 MESSAGES</span></div><p class="chat-hint">Gunakan bahasa yang sopan. Pesan akan terlihat oleh semua orang. Jangan bagikan kata sandi atau informasi pribadi.</p><p class="chat-status" id="chatStatus" role="status" aria-live="polite">Menyiapkan global chat…</p></div></div></section>
+
+<section class="section" id="global-announcement" hidden><div class="container"><div class="section-heading"><div><div class="section-no">✦ OFFICIAL / GLOBAL</div><h2 class="section-title">GLOBAL ANNOUNCEMENT.</h2></div><p class="section-description">Pengumuman resmi KAAA PROJECT. Hanya Developer yang dapat membuat atau mengubah pengumuman.</p></div><div id="globalAnnouncementFeed" class="announcement-feed"><article class="announcement-card"><div class="vote-small">OFFICIAL NOTICE</div><h3>Memuat pengumuman…</h3></article></div><aside class="announcement-admin" id="globalAnnouncementAdmin" hidden><div class="vote-small">✦ DEVELOPER VERIFIED</div><h3><span aria-hidden="true">✦</span> Developer Announcement Console.</h3><label for="globalAnnouncementTitle">JUDUL</label><input id="globalAnnouncementTitle" maxlength="90" placeholder="Judul pengumuman"><label for="globalAnnouncementMessage">PESAN</label><textarea id="globalAnnouncementMessage" maxlength="2000" placeholder="Tulis pengumuman untuk semua pengunjung..."></textarea><label for="globalAnnouncementDurationValue">DURASI CUSTOM</label><div style="display:flex;gap:8px;margin-bottom:12px;align-items:stretch"><input id="globalAnnouncementDurationValue" type="number" min="1" max="525600" step="1" value="24" inputmode="numeric" aria-label="Jumlah durasi" style="flex:1;min-width:0;padding:12px;background:var(--bg);color:var(--text);border:2px solid var(--border)"><select id="globalAnnouncementDurationUnit" aria-label="Satuan durasi" style="flex:1;padding:12px;background:var(--bg);color:var(--text);border:2px solid var(--border)"><option value="minutes">Menit</option><option value="hours" selected>Jam</option><option value="days">Hari</option><option value="forever">Selamanya</option></select></div><p class="profile-status">Tentukan sendiri jumlah menit, jam, atau hari. Pilih Selamanya agar tidak kedaluwarsa.</p><button class="button" id="globalAnnouncementPublish" type="button">PUBLISH GLOBALLY ↗</button><p id="globalAnnouncementStatus" class="profile-status" role="status">Login sebagai Developer untuk membuat pengumuman.</p></aside></div></section>
+
+<section class="section" id="voting"><div class="container"><div class="section-heading"><div><div class="section-no">04 — COMMUNITY CHOICE</div><h2 class="section-title">VOTE A FEATURE.</h2></div><p class="section-description">Pilih fitur yang ingin hadir berikutnya di KAAI PROJECT. Hasil suara diperbarui dari database.</p></div>
+<div class="vote-announcement" id="voteAnnouncement" hidden><div class="vote-small">OFFICIAL ANNOUNCEMENT</div><h3 id="voteWinnerTitle">Pemenang belum diumumkan</h3><p id="voteWinnerMessage"></p><small id="voteWinnerDate"></small></div>
+<div class="vote-layout"><div><div class="vote-list" id="voteList"><div class="vote-card"><h3>Memuat pilihan...</h3><p>Hubungkan website ke Supabase untuk menampilkan pilihan voting.</p></div></div><div class="vote-status" id="voteStatus" role="status" aria-live="polite">Voting belum terhubung. Isi konfigurasi Supabase di kode website terlebih dahulu.</div></div>
+<aside class="vote-admin"><div class="vote-small">ADMIN AREA</div><h3>Official winner.</h3><p>Login dengan akun admin yang sudah kamu buat di Supabase. Hanya User ID yang terdaftar di tabel voting_admins yang dapat mengumumkan pemenang.</p>
+<form id="voteAdminLogin"><label for="voteAdminEmail">Email admin</label><input id="voteAdminEmail" type="email" autocomplete="username" placeholder="Email admin" required><label for="voteAdminPassword">Password admin</label><input id="voteAdminPassword" type="password" autocomplete="current-password" placeholder="Password admin" required><button class="button" type="submit">ADMIN LOGIN ↗</button></form>
+<div id="voteAdminControls" hidden><label for="voteWinnerSelect">Pilih pemenang resmi</label><select id="voteWinnerSelect"></select><label for="voteWinnerText">Pesan pengumuman</label><textarea id="voteWinnerText" placeholder="Contoh: Terima kasih sudah ikut voting KAAI PROJECT!"></textarea><button class="button" id="announceWinnerBtn" type="button">ANNOUNCE WINNER ↗</button><button class="button" id="voteAdminLogout" type="button">LOG OUT</button></div>
+<div class="vote-status" id="voteAdminStatus" role="status" aria-live="polite">Admin belum login.</div></aside></div></div></section>
+<section class="section" id="games"><div class="container"><div class="section-heading"><div><div class="section-no">05 — GAME LINKS</div><h2 class="section-title">GAME LINKS.</h2></div><p class="section-description">Cari dan buka tautan yang kamu perlukan.</p></div><input class="search-box" id="searchInput" type="search" placeholder="Cari download, UID, account..." aria-label="Cari link"><div class="game-grid" id="gameGrid">
+<article class="game-card" data-search="chrono project apk download"><div class="game-art yellow"><span class="game-icon">⬇</span><span class="tag">APK FILE</span></div><div class="game-content"><h3>Chrono Project</h3><p>Buka halaman download APK.</p><a class="button" href="https://www.mediafire.com/file/uwhdzz7xj1dvebi/CHRONO+PROJECT_1.56.1.apk/file" target="_blank" rel="noopener noreferrer">DOWNLOAD APK ↗</a></div></article>
+<article class="game-card" data-search="verify uid verifikasi chrono"><div class="game-art blue-bg"><span class="game-icon">⌕</span><span class="tag">VERIFY</span></div><div class="game-content"><h3>Verify UID</h3><p>Kunjungi halaman verifikasi UID.</p><a class="button" href="https://chronoprojects.com/verify" target="_blank" rel="noopener noreferrer">VERIFY UID ↗</a></div></article>
+<article class="game-card" data-search="create account daftar register"><div class="game-art pink-bg"><span class="game-icon">✳</span><span class="tag">REGISTER</span></div><div class="game-content"><h3>Create Account</h3><p>Buka halaman pendaftaran akun.</p><a class="button" href="https://core.chronoprojects.com/chrono/register" target="_blank" rel="noopener noreferrer">BUAT ACCOUNT ↗</a></div></article>
+</div><div class="empty-result" id="emptyResult">Link tidak ditemukan.</div></div></section>
+<section class="section" id="about"><div class="container"><div class="section-heading"><div><div class="section-no">06 — THE IDEA</div><h2 class="section-title">ABOUT US.</h2></div></div><div class="about-grid"><div class="about-badge"><small>KAAI PROJECT / EST. 2026</small><strong>K✳</strong><small>BUILT FOR THE COMMUNITY.</small></div><div class="about-copy"><h3>Less noise. More character.</h3><p>KAAI PROJECT mengumpulkan tautan, musik, dan komunitas dalam satu halaman.</p><p>Neo Brutalism dengan warna kontras, garis tebal, bayangan tegas, dan fitur yang praktis.</p></div></div></div></section>
+</main>
+<footer class="footer"><div class="container footer-inner"><div class="footer-brand">KAAI PROJECT.</div><div class="footer-credit">ALL FILE BY CHRONO PROJECT</div><div class="footer-small">© <span id="year"></span> KAAI PROJECT — MADE WITH INTENTION.</div></div></footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+let soundEnabled=true,audioContext=null;
+function clickSound(){if(!soundEnabled)return;try{const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;if(!audioContext)audioContext=new AC();if(audioContext.state==="suspended")audioContext.resume();const o=audioContext.createOscillator(),g=audioContext.createGain();o.type="sine";o.frequency.setValueAtTime(850,audioContext.currentTime);o.frequency.exponentialRampToValueAtTime(520,audioContext.currentTime+.045);g.gain.setValueAtTime(.055,audioContext.currentTime);g.gain.exponentialRampToValueAtTime(.001,audioContext.currentTime+.055);o.connect(g);g.connect(audioContext.destination);o.start();o.stop(audioContext.currentTime+.06)}catch(e){}}
+document.addEventListener("click",e=>{if(e.target.closest("a,button"))clickSound()});
+const root=document.documentElement;
+function setTheme(t){root.setAttribute("data-theme",t);try{localStorage.setItem("kaai-project-theme",t)}catch(e){}}
+let theme="light";try{theme=localStorage.getItem("kaai-project-theme")||"light"}catch(e){}setTheme(theme);
+const commandInput=document.getElementById("commandInput"),commandResults=document.getElementById("commandResults"),commandMenu=document.getElementById("commandMenu"),commandForm=document.getElementById("commandForm");
+const commands=[
+ {name:"Home",desc:"Halaman utama",aliases:"home beranda utama",target:"#home"},
+ {name:"Saluran",desc:"WhatsApp community",aliases:"saluran channel komunitas whatsapp",target:"#saluran"},
+ {name:"TikTok",desc:"Profil kreator",aliases:"tiktok creator kaa.vk0",target:"#tiktok"},
+ {name:"Music",desc:"Cari dan putar lagu",aliases:"music musik lagu soundtrack player",target:"#music"},
+ {name:"Profile",desc:"Community Profile",aliases:"profile profil username avatar community",target:"#profile"},
+ {name:"Chat",desc:"Global Chat",aliases:"chat obrolan global chat",target:"#global-chat"},
+ {name:"Voting",desc:"Vote fitur komunitas",aliases:"voting vote suara",target:"#voting"},
+ {name:"Link Game",desc:"Download dan layanan",aliases:"game games link download apk",target:"#games"},
+ {name:"Sound toggle",desc:"Aktif/nonaktif suara klik",aliases:"sound suara click bunyi",action:"sound"},
+ {name:"Dark mode",desc:"Ganti tema gelap/terang",aliases:"dark mode gelap terang theme tema",action:"theme"}
+];
+function closeCommands(){commandResults.classList.remove("open");commandInput.setAttribute("aria-expanded","false")}
+function showCommands(query=""){const q=query.trim().toLowerCase();const matches=commands.filter(c=>(c.name+" "+c.desc+" "+c.aliases).toLowerCase().includes(q));commandResults.innerHTML="";if(!matches.length){const empty=document.createElement("div");empty.className="command-option";empty.textContent="Tidak ada command yang cocok";commandResults.appendChild(empty)}else matches.forEach(c=>{const b=document.createElement("button");b.type="button";b.className="command-option";b.setAttribute("role","option");b.innerHTML="<span>⌁ "+c.name+"</span><small>"+c.desc+"</small>";b.addEventListener("click",()=>runCommand(c));commandResults.appendChild(b)});commandResults.classList.add("open");commandInput.setAttribute("aria-expanded","true")}
+function runCommand(c){closeCommands();if(c.target){const el=document.querySelector(c.target);if(el){el.scrollIntoView({behavior:"smooth",block:"start"});history.replaceState(null,"",c.target)}}else if(c.action==="sound"){soundEnabled=!soundEnabled;commandInput.placeholder=soundEnabled?"Sound ON · Search command...":"Sound OFF · Search command..."}else if(c.action==="theme"){setTheme(root.getAttribute("data-theme")==="dark"?"light":"dark")}commandInput.value="";commandInput.blur()}
+commandInput.addEventListener("input",()=>showCommands(commandInput.value));commandInput.addEventListener("focus",()=>showCommands(commandInput.value));commandMenu.addEventListener("click",()=>{commandInput.focus();showCommands("")});commandForm.addEventListener("submit",e=>{e.preventDefault();const q=commandInput.value.trim().toLowerCase();const match=commands.find(c=>(c.name+" "+c.aliases).toLowerCase().includes(q))||commands.find(c=>c.name.toLowerCase()===q);if(match)runCommand(match);else showCommands(q)});document.addEventListener("click",e=>{if(!e.target.closest(".command-wrap"))closeCommands()});document.addEventListener("keydown",e=>{if(e.key==="Escape")closeCommands()});
+
+const player=document.getElementById("audioPlayer");
+const playBtn=document.getElementById("playBtn");
+const nowTitle=document.getElementById("nowTitle");
+const nowArtist=document.getElementById("nowArtist");
+const albumArt=document.getElementById("albumArt");
+const currentTime=document.getElementById("currentTime");
+const duration=document.getElementById("duration");
+const progress=document.getElementById("progressSlider");
+const volume=document.getElementById("volumeSlider");
+const trackList=document.getElementById("trackList");
+const musicNote=document.getElementById("musicNote");
+const musicSearchForm=document.getElementById("musicSearchForm");
+const musicSearchInput=document.getElementById("musicSearchInput");
+const musicSearchBtn=document.getElementById("musicSearchBtn");
+const musicResultCount=document.getElementById("musicResultCount");
+const openSpotify=document.getElementById("openSpotify");
+let results=[],currentTrack=-1,searchSerial=0;
+function fmt(s){if(!Number.isFinite(s)||s<0)return"0:00";return Math.floor(s/60)+":"+String(Math.floor(s%60)).padStart(2,"0")}
+function setStatus(message){musicNote.textContent=message}
+function safeText(value){return String(value||"")}
+function spotifySearchUrl(track){return "https://open.spotify.com/search/"+encodeURIComponent((track.trackName||"")+" "+(track.artistName||""))}
+function renderResults(){
+  trackList.replaceChildren();
+  if(!results.length){trackList.innerHTML='<p class="music-empty">Tidak ada hasil. Coba kata kunci lain.</p>';return}
+  results.forEach((t,i)=>{
+    const row=document.createElement("button");row.type="button";row.className="track"+(i===currentTrack?" active":"");row.setAttribute("aria-label","Putar "+safeText(t.trackName));
+    const img=document.createElement("img");img.className="track-cover";img.alt="Cover album";img.loading="lazy";img.src=t.artworkUrl100||"";img.onerror=()=>{img.style.visibility="hidden"};
+    const copy=document.createElement("span");copy.className="track-copy";
+    const name=document.createElement("span");name.className="track-name";name.textContent=t.trackName||"Unknown track";
+    const artist=document.createElement("span");artist.className="track-artist";artist.textContent=(t.artistName||"Unknown artist")+(t.collectionName?" · "+t.collectionName:"");
+    const state=document.createElement("span");state.className="track-state";state.textContent=t.previewUrl?(i===currentTrack?"♪":"▶"):"↗";
+    copy.append(name,artist);row.append(img,copy,state);
+    row.addEventListener("click",()=>{if(t.previewUrl){selectTrack(i,true)}else{window.open(spotifySearchUrl(t),"_blank","noopener,noreferrer");setStatus("Preview tidak tersedia untuk lagu ini. Membuka pencarian Spotify.")}});
+    trackList.append(row);
+  });
+}
+function selectTrack(i,autoplay){
+  if(i<0||i>=results.length)return;
+  currentTrack=i;const t=results[i];
+  nowTitle.textContent=t.trackName||"Unknown track";nowArtist.textContent=t.artistName||"Unknown artist";
+  albumArt.replaceChildren();
+  if(t.artworkUrl100){const img=document.createElement("img");img.src=t.artworkUrl100.replace("100x100bb","300x300bb");img.alt="Cover "+safeText(t.trackName);albumArt.append(img)}else albumArt.textContent="♫";
+  openSpotify.href=spotifySearchUrl(t);
+  progress.value=0;currentTime.textContent="0:00";duration.textContent="0:00";player.pause();
+  if(!t.previewUrl){player.removeAttribute("src");player.load();playBtn.disabled=true;playBtn.textContent="▶ PLAY";setStatus("Preview tidak tersedia untuk lagu ini. Tekan OPEN IN SPOTIFY untuk mendengarkan versi lengkap.");renderResults();return}
+  playBtn.disabled=false;player.src=t.previewUrl;player.load();renderResults();
+  setStatus("Dipilih: "+t.trackName+" — "+t.artistName+". Preview tersedia untuk diputar.");
+  if(autoplay){player.play().then(()=>setStatus("Memutar preview: "+t.trackName)).catch(()=>setStatus("Browser belum mengizinkan audio. Tekan PLAY untuk mencoba lagi."))}
+}
+async function searchMusic(term){
+  const query=term.trim();if(!query)return;
+  const serial=++searchSerial;musicSearchBtn.disabled=true;musicSearchBtn.textContent="SEARCHING…";musicResultCount.textContent="Mencari…";
+  trackList.innerHTML='<p class="music-empty">Sedang mencari lagu…</p>';setStatus("Mencari lagu: "+query);
+  try{
+    const url="https://itunes.apple.com/search?term="+encodeURIComponent(query)+"&entity=song&media=music&limit=25";
+    const response=await fetch(url,{headers:{Accept:"application/json"}});if(!response.ok)throw new Error("HTTP "+response.status);
+    const data=await response.json();if(serial!==searchSerial)return;
+    results=(data.results||[]).filter(t=>t.trackName&&t.artistName).map(t=>({trackName:t.trackName,artistName:t.artistName,collectionName:t.collectionName||"",artworkUrl100:t.artworkUrl100||"",previewUrl:t.previewUrl||"",trackViewUrl:t.trackViewUrl||""}));
+    currentTrack=-1;musicResultCount.textContent=results.length+" hasil";renderResults();
+    if(results.length){setStatus("Ditemukan "+results.length+" hasil untuk “"+query+"”. Pilih lagu untuk memutar preview.")}else setStatus("Tidak ada hasil untuk “"+query+"”. Coba judul atau ejaan lain.");
+  }catch(err){if(serial!==searchSerial)return;results=[];musicResultCount.textContent="Pencarian gagal";trackList.innerHTML='<p class="music-empty">Pencarian gagal dimuat. Periksa koneksi internet, lalu coba lagi.</p>';setStatus("Katalog musik tidak bisa diakses saat ini. Pastikan perangkat terhubung ke internet.")}
+  finally{if(serial===searchSerial){musicSearchBtn.disabled=false;musicSearchBtn.textContent="⌕ SEARCH"}}
+}
+musicSearchForm.addEventListener("submit",e=>{e.preventDefault();searchMusic(musicSearchInput.value)});
+document.getElementById("prevBtn").addEventListener("click",()=>{if(results.length)selectTrack((currentTrack<=0?results.length:currentTrack)-1,true)});
+document.getElementById("nextBtn").addEventListener("click",()=>{if(results.length)selectTrack((currentTrack+1)%results.length,true)});
+playBtn.addEventListener("click",()=>{
+  if(currentTrack<0){setStatus("Cari lagu terlebih dahulu, lalu pilih salah satu hasil.");return}
+  if(!results[currentTrack]||!results[currentTrack].previewUrl){setStatus("Preview tidak tersedia. Gunakan OPEN IN SPOTIFY untuk lagu lengkap.");return}
+  if(player.paused)player.play().then(()=>setStatus("Memutar preview: "+results[currentTrack].trackName)).catch(()=>setStatus("Gagal memutar preview. Coba tekan PLAY sekali lagi."));else player.pause();
+});
+player.addEventListener("loadedmetadata",()=>duration.textContent=fmt(player.duration));
+player.addEventListener("timeupdate",()=>{currentTime.textContent=fmt(player.currentTime);if(Number.isFinite(player.duration)&&player.duration>0)progress.value=player.currentTime/player.duration*100});
+progress.addEventListener("input",()=>{if(Number.isFinite(player.duration)&&player.duration>0)player.currentTime=Number(progress.value)/100*player.duration});
+volume.addEventListener("input",()=>player.volume=Number(volume.value));player.volume=Number(volume.value);
+player.addEventListener("play",()=>playBtn.textContent="Ⅱ PAUSE");player.addEventListener("pause",()=>playBtn.textContent="▶ PLAY");
+player.addEventListener("ended",()=>{if(results.length)selectTrack((currentTrack+1)%results.length,true)});
+player.addEventListener("error",()=>{if(currentTrack>=0&&results[currentTrack]?.previewUrl)setStatus("Preview gagal dimuat. Coba lagu lain atau buka di Spotify.")});
+const searchInput=document.getElementById("searchInput"),cards=[...document.querySelectorAll(".game-card")],empty=document.getElementById("emptyResult");
+searchInput.addEventListener("input",()=>{const q=searchInput.value.toLowerCase().trim();let n=0;cards.forEach(c=>{const ok=(c.innerText+" "+c.dataset.search).toLowerCase().includes(q);c.style.display=ok?"flex":"none";if(ok)n++});empty.style.display=n?"none":"block"});
+// Scroll reveal: elemen masuk dengan halus saat terlihat, termasuk ketika scroll naik/turun.
+const revealTargets=document.querySelectorAll(".section-heading,.tiktok-card,.music-player,.game-card,.about-badge,.about-copy,.panel");
+revealTargets.forEach(el=>el.classList.add("reveal"));
+if("IntersectionObserver" in window){const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add("is-visible");else entry.target.classList.remove("is-visible")}),{threshold:0.08,rootMargin:"0px 0px -24px 0px"});revealTargets.forEach(el=>revealObserver.observe(el))}else{revealTargets.forEach(el=>el.classList.add("is-visible"))}
+document.getElementById("year").textContent=new Date().getFullYear();
+
+// === KAAI PROJECT VOTING / Supabase ===
+// Ganti SUPABASE_URL dengan Project URL milikmu. Publishable key boleh berada di frontend.
+// Jangan pernah menaruh service_role / secret key di file HTML.
+const SUPABASE_URL = "https://xtikfrorebogakcdyjvv.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_9i5NuxCwv3HWAMbSnR1LpQ_--45LIS4";
+const KAAI_DEVELOPER_USER_ID = "81e03fe7-60ce-4095-be9e-a477eebac655";
+const voteListEl=document.getElementById("voteList");
+const voteStatusEl=document.getElementById("voteStatus");
+const voteAdminStatusEl=document.getElementById("voteAdminStatus");
+const voteAdminLogin=document.getElementById("voteAdminLogin");
+const voteAdminControls=document.getElementById("voteAdminControls");
+const voteWinnerSelect=document.getElementById("voteWinnerSelect");
+let voteClient=null, voteOptions=[];
+let profileUser=null, profileAvatarFile=null, profileAvatarUrl=null;
+function voteStatus(message){voteStatusEl.textContent=message}
+function adminStatus(message){voteAdminStatusEl.textContent=message}
+function supabaseConfigured(){return window.supabase && SUPABASE_URL.startsWith("https://") && !SUPABASE_URL.includes("PASTE_") && SUPABASE_PUBLISHABLE_KEY && !SUPABASE_PUBLISHABLE_KEY.includes("PASTE_")}
+function escapeVoteText(value){return String(value??"")}
+function voteButton(text,callback){const b=document.createElement("button");b.type="button";b.className="button";b.textContent=text;b.addEventListener("click",callback);return b}
+async function ensureAnonymousSession(){
+  const {data,error}=await voteClient.auth.getSession();
+  if(error)throw error;
+  if(data.session?.user?.is_anonymous)return data.session;
+  // cast_vote hanya menerima sesi anonymous. Jika sesi admin/email sedang aktif,
+  // keluar dahulu lalu buat sesi anonymous khusus untuk mengirim suara.
+  if(data.session){
+    const {error:signOutError}=await voteClient.auth.signOut();
+    if(signOutError)throw signOutError;
+    syncAdminUI(false);
+    adminStatus("Sesi admin ditutup untuk berpindah ke sesi voting anonim. Login admin kembali jika ingin mengumumkan pemenang.");
+  }
+  const result=await voteClient.auth.signInAnonymously();
+  if(result.error)throw result.error;
+  if(!result.data.session?.user?.is_anonymous)throw new Error("Sesi anonymous tidak berhasil dibuat. Periksa pengaturan Supabase Authentication.");
+  return result.data.session;
+}
+async function loadVoteOptions(){
+  if(!voteClient){voteStatus("Voting belum terhubung. Isi SUPABASE_URL dan SUPABASE_PUBLISHABLE_KEY di bagian konfigurasi script.");return}
+  const {data,error}=await voteClient.from("voting_options").select("id,title,description").order("id");
+  if(error){voteStatus("Gagal memuat pilihan voting: "+error.message);return}
+  voteOptions=data||[];
+  const {data:results,error:resultError}=await voteClient.from("voting_results").select("id,vote_count");
+  if(resultError){voteStatus("Pilihan berhasil dimuat, tetapi hasil suara gagal dibaca: "+resultError.message)}
+  const counts=new Map((results||[]).map(r=>[String(r.id),Number(r.vote_count||0)]));
+  voteListEl.replaceChildren();voteWinnerSelect.replaceChildren();
+  if(!voteOptions.length){voteListEl.textContent="Belum ada pilihan voting.";return}
+  voteOptions.forEach((option,index)=>{
+    const card=document.createElement("article");card.className="vote-card reveal is-visible";
+    const label=document.createElement("div");label.className="vote-small";label.textContent="OPTION "+String(index+1).padStart(2,"0");
+    const title=document.createElement("h3");title.textContent=option.title;
+    const description=document.createElement("p");description.textContent=option.description||"Pilihan fitur komunitas KAAI PROJECT.";
+    const count=document.createElement("div");count.className="vote-count";count.textContent=(counts.get(String(option.id))??0)+" VOTES";
+    const button=voteButton("VOTE THIS FEATURE ↗",()=>castVote(option.id,button));
+    card.append(label,title,description,count,button);voteListEl.append(card);
+    const opt=document.createElement("option");opt.value=String(option.id);opt.textContent=option.title;voteWinnerSelect.append(opt);
+  });
+  await loadAnnouncement();
+}
+async function castVote(optionId,button){
+  if(!voteClient)return;
+  button.disabled=true;button.textContent="SUBMITTING…";
+  try{await ensureAnonymousSession();const {error}=await voteClient.rpc("cast_vote",{p_option_id:optionId});if(error)throw error;voteStatus("Suaramu berhasil dikirim! Terima kasih sudah ikut menentukan fitur berikutnya.");await loadVoteOptions()}
+  catch(error){const message=error?.message||"Gagal mengirim suara.";voteStatus(message.toLowerCase().includes("already voted")?"Akun ini sudah memberikan suara. Setiap akun hanya bisa memilih satu kali.":"Suara gagal dikirim: "+message);button.disabled=false;button.textContent="VOTE THIS FEATURE ↗"}
+}
+async function loadAnnouncement(){
+  const {data,error}=await voteClient.from("voting_announcement").select("winner_option_id,message,announced_at").eq("id",1).maybeSingle();
+  if(error||!data||!data.winner_option_id)return;
+  const winner=voteOptions.find(o=>String(o.id)===String(data.winner_option_id));if(!winner)return;
+  document.getElementById("voteAnnouncement").hidden=false;
+  document.getElementById("voteWinnerTitle").textContent=winner.title;
+  document.getElementById("voteWinnerMessage").textContent=data.message||"Pemenang resmi voting KAAI PROJECT.";
+  document.getElementById("voteWinnerDate").textContent=data.announced_at?"Diumumkan: "+new Date(data.announced_at).toLocaleString("id-ID"):"";
+}
+function syncAdminUI(isAdminSession){voteAdminControls.hidden=!isAdminSession;voteAdminLogin.hidden=isAdminSession}
+const profileStatusEl=document.getElementById("profileStatus");
+function profileStatus(message){profileStatusEl.textContent=message}
+function escapeProfileText(value){return String(value??"")}
+async function isDeveloper(userId){
+  if(!userId||!voteClient)return false;
+  const {data,error}=await voteClient.from("project_roles").select("role").eq("user_id",userId).eq("role","developer").maybeSingle();
+  if(error){console.warn("Developer role check failed:",error.message);return false}
+  return !!data;
+}
+function renderMyRoleBadge(isDeveloperUser){
+  const host=document.getElementById("myRoleBadge");host.replaceChildren();
+  if(isDeveloperUser){const badge=document.createElement("span");badge.className="role-badge";badge.textContent="✦ DEVELOPER";host.append(badge)}
+}
+const accountAuthStatusEl=document.getElementById("accountAuthStatus");
+function accountAuthStatus(message){accountAuthStatusEl.textContent=message}
+function accountAuthButtonsBusy(busy){["accountSignIn","accountSignUp","developerSignIn"].forEach(id=>document.getElementById(id).disabled=busy)}
+function updateAccountAuthUI(user){
+ const isRealUser=!!(user&&!user.is_anonymous);
+ document.getElementById("accountSignOut").hidden=!isRealUser;
+ if(!user){accountAuthStatus("Belum ada sesi login.");return}
+ if(user.is_anonymous){accountAuthStatus("Mode pengunjung aktif. Login atau buat akun untuk menyimpan akses dengan email.");return}
+ const owner=user.id===KAAI_DEVELOPER_USER_ID;
+ accountAuthStatus(owner?"Akun pemilik terdeteksi. Memverifikasi akses Developer…":"Login berhasil. Selamat datang kembali.");
+}
+async function refreshAuthenticatedProfile(user){
+ if(!user)return;
+ profileUser=user;
+ renderMyRoleBadge(user.id===KAAI_DEVELOPER_USER_ID && await isDeveloper(user.id));
+ const {data,error}=await voteClient.from("user_profiles").select("display_name,avatar_url").eq("id",user.id).maybeSingle();
+ if(error)throw error;
+ document.getElementById("profileDisplayName").value=data?.display_name||"";
+ profileAvatarUrl=data?.avatar_url||null;
+ document.getElementById("profileAvatarPreview").src=profileAvatarUrl||"https://placehold.co/300x300/f7df55/171717?text=K";
+ profileStatus(data?.display_name?"Profil akun berhasil dimuat.":"Akun siap. Buat nama tampilan lalu tekan SAVE PROFILE.");
+ await loadPublicProfiles();
+ chatLastSignature=null;await loadGlobalChat();
+}
+async function performAccountAuth(mode){
+ if(!voteClient){accountAuthStatus("Supabase belum terhubung.");return}
+ const email=document.getElementById("accountEmail").value.trim();
+ const password=document.getElementById("accountPassword").value;
+ if(!email||!password){accountAuthStatus("Masukkan email dan password terlebih dahulu.");return}
+ if(password.length<6){accountAuthStatus("Password minimal 6 karakter.");return}
+ accountAuthButtonsBusy(true);
+ try{
+  const {data:{session}}=await voteClient.auth.getSession();
+  if(session){const {error}=await voteClient.auth.signOut();if(error)throw error}
+  let result;
+  if(mode==="signup"){
+   result=await voteClient.auth.signUp({email,password,options:{emailRedirectTo:window.location.href.split("#")[0]}});
+   if(result.error)throw result.error;
+   if(result.data.session){await refreshAuthenticatedProfile(result.data.user);updateAccountAuthUI(result.data.user);accountAuthStatus("Akun berhasil dibuat dan login. Simpan Community Profile kamu.")}
+   else accountAuthStatus("Pendaftaran diterima. Periksa inbox email untuk konfirmasi, lalu login dengan email dan password. Jika tidak ada email, cek Authentication → Email di Supabase.");
+  }else{
+   result=await voteClient.auth.signInWithPassword({email,password});if(result.error)throw result.error;
+   const user=result.data.user;
+   if(mode==="developer"){
+    if(user.id!==KAAI_DEVELOPER_USER_ID){await voteClient.auth.signOut();profileUser=null;renderMyRoleBadge(false);throw new Error("Akses ditolak: akun ini bukan akun Developer pemilik.")}
+    const {data:role,error:roleError}=await voteClient.from("project_roles").select("user_id,role").eq("user_id",KAAI_DEVELOPER_USER_ID).eq("role","developer").maybeSingle();
+    if(roleError)throw roleError;
+    if(!role){await voteClient.auth.signOut();profileUser=null;renderMyRoleBadge(false);throw new Error("Role Developer belum terpasang. Jalankan SQL setup Developer.")}
+    accountAuthStatus("Developer terverifikasi. Akses khusus pemilik aktif.");
+   }else accountAuthStatus("Login berhasil. Selamat datang kembali!");
+   await refreshAuthenticatedProfile(user);updateAccountAuthUI(user);
+   if(user.id===KAAI_DEVELOPER_USER_ID && await isDeveloper(user.id))accountAuthStatus("✦ DEVELOPER LOGIN BERHASIL — akun pemilik terverifikasi.");
+  }
+ }catch(error){accountAuthStatus("Gagal: "+(error?.message||"Periksa koneksi Supabase dan kredensial."))}
+ finally{accountAuthButtonsBusy(false)}
+}
+document.getElementById("accountSignIn").addEventListener("click",()=>performAccountAuth("login"));
+document.getElementById("accountSignUp").addEventListener("click",()=>performAccountAuth("signup"));
+document.getElementById("developerSignIn").addEventListener("click",()=>performAccountAuth("developer"));
+document.getElementById("accountSignOut").addEventListener("click",async()=>{
+ try{const {error}=await voteClient.auth.signOut();if(error)throw error;profileUser=null;profileAvatarUrl=null;renderMyRoleBadge(false);syncAdminUI(false);adminStatus("Sesi ditutup.");accountAuthStatus("Logout berhasil. Beralih ke mode pengunjung…");await initProfile()}
+ catch(error){accountAuthStatus("Logout gagal: "+(error?.message||"unknown error"))}
+});
+
+async function initProfile(){
+  try{
+    let {data:{session},error}=await voteClient.auth.getSession();if(error)throw error;
+    if(!session){const signed=await voteClient.auth.signInAnonymously();if(signed.error)throw signed.error;session=signed.data.session}
+    profileUser=session.user;
+    updateAccountAuthUI(profileUser);
+    renderMyRoleBadge(profileUser.id===KAAI_DEVELOPER_USER_ID && await isDeveloper(profileUser.id));
+    const {data,error:readError}=await voteClient.from("user_profiles").select("display_name,avatar_url").eq("id",profileUser.id).maybeSingle();
+    if(readError)throw readError;
+    document.getElementById("profileDisplayName").value=data?.display_name||"KAAI USER";
+    profileAvatarUrl=data?.avatar_url||null;
+    if(profileAvatarUrl)document.getElementById("profileAvatarPreview").src=profileAvatarUrl;
+    profileStatus("Profil siap. Ubah nama atau foto, lalu tekan SAVE PROFILE.");
+    await loadPublicProfiles();
+    startGlobalChat();
+  loadGlobalAnnouncements();
+  syncAnnouncementAdmin();
+  setInterval(loadGlobalAnnouncements,12000);
+  voteClient.auth.onAuthStateChange(()=>{setTimeout(syncAnnouncementAdmin,0)});
+  }catch(err){profileStatus("Profil belum terhubung: "+(err?.message||"Periksa SQL dan bucket avatars di Supabase."))}
+}
+async function loadPublicProfiles(){
+  const host=document.getElementById("publicProfiles");
+  const {data,error}=await voteClient.from("user_profiles").select("id,display_name,avatar_url,updated_at").order("updated_at",{ascending:false}).limit(24);
+  if(error){host.textContent="Profil publik belum bisa dimuat. Periksa policy SELECT user_profiles.";return}
+  host.replaceChildren();
+  if(!data?.length){host.textContent="Belum ada profil komunitas. Jadilah yang pertama!";return}
+  const ids=data.map(item=>item.id);
+  let developerIds=new Set();
+  if(ids.length){
+    const {data:roles,error:rolesError}=await voteClient.from("project_roles").select("user_id,role").in("user_id",ids).eq("role","developer");
+    if(!rolesError)developerIds=new Set((roles||[]).map(role=>role.user_id));
+    else console.warn("Public developer badges unavailable:",rolesError.message);
+  }
+  data.forEach(item=>{
+    const card=document.createElement("div");card.className="public-profile-card";
+    const img=document.createElement("img");img.className="public-profile-avatar";img.alt="Foto profil";img.src=item.avatar_url||"https://placehold.co/100x100/f7df55/171717?text=K";
+    const meta=document.createElement("div");meta.className="public-profile-meta";
+    const name=document.createElement("div");name.className="public-profile-name";name.textContent=item.display_name||"KAAI USER";
+    const id=document.createElement("div");id.className="public-profile-id";id.textContent=String(item.id).slice(0,8).toUpperCase();
+    meta.append(name,id);
+    if(developerIds.has(item.id)){const badge=document.createElement("span");badge.className="role-badge";badge.textContent="✦ DEVELOPER";meta.append(badge)}
+    card.append(img,meta);host.append(card)
+  })
+}
+document.getElementById("profileAvatarFile").addEventListener("change",e=>{const file=e.target.files?.[0];if(!file)return;if(file.size>3*1024*1024){profileStatus("Ukuran foto melebihi 3 MB.");e.target.value="";return}if(!/^image\/(png|jpeg|webp|gif)$/.test(file.type)){profileStatus("Pilih foto PNG, JPG, WEBP, atau GIF.");e.target.value="";return}profileAvatarFile=file;document.getElementById("profileAvatarPreview").src=URL.createObjectURL(file);profileStatus("Foto dipilih. Tekan SAVE PROFILE untuk menyimpan.")});
+document.getElementById("profileForm").addEventListener("submit",async e=>{
+ e.preventDefault();if(!voteClient)return;const btn=document.getElementById("saveProfileBtn");btn.disabled=true;btn.textContent="SAVING…";
+ try{
+  if(!profileUser){let {data:{session},error}=await voteClient.auth.getSession();if(error)throw error;if(!session){const r=await voteClient.auth.signInAnonymously();if(r.error)throw r.error;session=r.data.session}profileUser=session.user}
+  let avatarUrl=profileAvatarUrl;
+  if(profileAvatarFile){const ext=({"image/jpeg":"jpg","image/png":"png","image/webp":"webp","image/gif":"gif"})[profileAvatarFile.type]||"jpg";const path=profileUser.id+"/avatar."+ext;const {error:uploadError}=await voteClient.storage.from("avatars").upload(path,profileAvatarFile,{upsert:true,contentType:profileAvatarFile.type,cacheControl:"3600"});if(uploadError)throw uploadError;const {data}=voteClient.storage.from("avatars").getPublicUrl(path);avatarUrl=data.publicUrl+"?v="+Date.now();profileAvatarUrl=avatarUrl;profileAvatarFile=null}
+  const name=document.getElementById("profileDisplayName").value.trim()||"KAAI USER";
+  const {error}=await voteClient.from("user_profiles").upsert({id:profileUser.id,display_name:name,avatar_url:avatarUrl,updated_at:new Date().toISOString()},{onConflict:"id"});if(error)throw error;
+  profileStatus("Profil berhasil disimpan dan terlihat oleh pengunjung lain.");await loadPublicProfiles();
+ }catch(err){profileStatus("Gagal menyimpan profil: "+(err?.message||"Periksa SQL, policy, dan bucket avatars."))}finally{btn.disabled=false;btn.textContent="SAVE PROFILE ↗"}
+});
+// === GLOBAL CHAT: username/avatar sourced from user_profiles ===
+const chatLogEl=document.getElementById("chatLog"), chatStatusEl=document.getElementById("chatStatus"), chatIdentityEl=document.getElementById("chatIdentity");
+let chatPollTimer=null, chatLastSignature=null;
+const CHAT_REACTIONS=["👍","❤️","😂","🔥"];
+function chatStatus(message){chatStatusEl.textContent=message}
+function chatCurrentName(){return (document.getElementById("profileDisplayName").value||"").trim()||"KAAI USER"}
+function chatCurrentAvatar(){return profileAvatarUrl||"https://placehold.co/100x100/f7df55/171717?text=K"}
+function escapeChatText(value){return String(value??"")}
+function chatTime(value){try{return new Date(value).toLocaleTimeString("id-ID",{hour:"2-digit",minute:"2-digit"})}catch(e){return ""}}
+async function toggleChatReaction(messageId,emoji,button){
+ if(!voteClient)return;button.disabled=true;
+ try{
+  let {data:{session},error:sessionError}=await voteClient.auth.getSession();if(sessionError)throw sessionError;
+  if(!session){const signed=await voteClient.auth.signInAnonymously();if(signed.error)throw signed.error;session=signed.data.session;profileUser=session.user}
+  const {data:existing,error:readError}=await voteClient.from("global_chat_reactions").select("message_id,user_id,emoji").eq("message_id",messageId).eq("user_id",session.user.id).eq("emoji",emoji).maybeSingle();if(readError)throw readError;
+  if(existing){const {error}=await voteClient.from("global_chat_reactions").delete().eq("message_id",messageId).eq("user_id",session.user.id).eq("emoji",emoji);if(error)throw error}
+  else {const {error}=await voteClient.from("global_chat_reactions").insert({message_id:messageId,user_id:session.user.id,emoji});if(error)throw error}
+  chatLastSignature=null;await loadGlobalChat();
+ }catch(error){chatStatus("Reaksi belum tersedia. Jalankan SQL setup terbaru. "+(error?.message||""))}finally{button.disabled=false}
+}
+async function loadGlobalChat(){
+ if(!voteClient)return;
+ try{
+  const {data:rows,error}=await voteClient.from("global_chat").select("id,user_id,message,created_at").order("created_at",{ascending:false}).limit(80);
+  if(error)throw error;
+  const messages=(rows||[]).reverse();
+  const signature=messages.map(m=>m.id+":"+m.created_at).join("|");
+  const ids=[...new Set(messages.map(m=>m.user_id))];let profilesById={};
+  if(ids.length){const {data:profiles,error:profileError}=await voteClient.from("user_profiles").select("id,display_name,avatar_url").in("id",ids);if(!profileError)(profiles||[]).forEach(p=>profilesById[p.id]=p)}
+  const messageIds=messages.map(m=>m.id);let reactions=[];if(messageIds.length){const {data:rdata,error:rerr}=await voteClient.from("global_chat_reactions").select("message_id,user_id,emoji").in("message_id",messageIds);if(!rerr)reactions=rdata||[]}
+  const reactionSignature=reactions.map(r=>r.message_id+":"+r.user_id+":"+r.emoji).sort().join("|");
+  const combinedSignature=signature+"#"+reactionSignature;
+  if(combinedSignature===chatLastSignature)return;chatLastSignature=combinedSignature;
+  chatLogEl.replaceChildren();document.getElementById("chatCount").textContent=messages.length+" MESSAGES";
+  if(!messages.length){const empty=document.createElement("p");empty.className="chat-empty";empty.textContent="Belum ada pesan. Jadilah orang pertama yang menyapa!";chatLogEl.append(empty)}
+  messages.forEach(m=>{
+   const own=profileUser&&m.user_id===profileUser.id;const profile=profilesById[m.user_id]||{};
+   const wrap=document.createElement("article");wrap.className="chat-message"+(own?" mine":"");
+   const head=document.createElement("div");head.className="chat-message-head";
+   const avatar=document.createElement("img");avatar.alt="";avatar.loading="lazy";avatar.src=profile.avatar_url||"https://placehold.co/100x100/f7df55/171717?text=K";avatar.onerror=()=>{avatar.onerror=null;avatar.src="https://placehold.co/100x100/f7df55/171717?text=K"};
+   const name=document.createElement("span");name.textContent=profile.display_name||"KAAI USER";
+   const time=document.createElement("span");time.className="chat-message-time";time.textContent=chatTime(m.created_at);
+   head.append(avatar,name,time);const body=document.createElement("div");body.className="chat-message-body";body.textContent=m.message;wrap.append(head,body);
+   const reactionBar=document.createElement("div");reactionBar.className="chat-reactions";
+   CHAT_REACTIONS.forEach(emoji=>{const matching=reactions.filter(r=>String(r.message_id)===String(m.id)&&r.emoji===emoji);const mine=!!(profileUser&&matching.some(r=>r.user_id===profileUser.id));const rb=document.createElement("button");rb.type="button";rb.className="chat-reaction"+(mine?" active":"");rb.textContent=emoji+" "+matching.length;rb.setAttribute("aria-label",emoji+" reaction, "+matching.length+" votes");rb.addEventListener("click",()=>toggleChatReaction(m.id,emoji,rb));reactionBar.append(rb)});
+   wrap.append(reactionBar);chatLogEl.append(wrap)
+  });
+  chatLogEl.scrollTop=chatLogEl.scrollHeight;chatIdentityEl.textContent="SIGNED IN: "+chatCurrentName();chatStatus("Chat aktif · menampilkan "+messages.length+" pesan terbaru.");
+ }catch(error){chatStatus("Chat belum bisa dimuat: "+(error?.message||"buat tabel global_chat lewat SQL setup."))}
+}
+document.getElementById("chatForm").addEventListener("submit",async e=>{
+ e.preventDefault();if(!voteClient){chatStatus("Supabase belum terhubung.");return}
+ const input=document.getElementById("chatInput"),button=document.getElementById("chatSendBtn"),message=input.value.trim();if(!message)return;
+ button.disabled=true;
+ try{
+  let {data:{session},error:sessionError}=await voteClient.auth.getSession();if(sessionError)throw sessionError;
+  if(!session){const signed=await voteClient.auth.signInAnonymously();if(signed.error)throw signed.error;session=signed.data.session;profileUser=session.user}
+  if(!profileUser)profileUser=session.user;
+  // Require a saved community profile so the username shown in chat is the profile name.
+  const {data:profile,error:profileError}=await voteClient.from("user_profiles").select("display_name").eq("id",profileUser.id).maybeSingle();if(profileError)throw profileError;
+  if(!profile?.display_name){chatStatus("Simpan Community Profile terlebih dahulu agar username chat sesuai profil.");document.getElementById("profile").scrollIntoView({behavior:"smooth"});return}
+  const {error}=await voteClient.from("global_chat").insert({user_id:profileUser.id,message});if(error)throw error;
+  input.value="";chatStatus("Pesan terkirim.");await loadGlobalChat();
+ }catch(error){chatStatus("Gagal mengirim: "+(error?.message||"Periksa tabel/policy global_chat di Supabase."))}finally{button.disabled=false}
+});
+function startGlobalChat(){loadGlobalChat();if(chatPollTimer)clearInterval(chatPollTimer);chatPollTimer=setInterval(loadGlobalChat,5000)}
+
+voteAdminLogin.addEventListener("submit",async e=>{
+  e.preventDefault();if(!voteClient){adminStatus("Konfigurasi Supabase belum diisi.");return}
+  const email=document.getElementById("voteAdminEmail").value.trim();const password=document.getElementById("voteAdminPassword").value;
+  const submit=voteAdminLogin.querySelector('button[type="submit"]');submit.disabled=true;
+  try{const {error}=await voteClient.auth.signInWithPassword({email,password});if(error)throw error;const {data:{user}}=await voteClient.auth.getUser();const {data:adminRow,error:adminError}=await voteClient.from("voting_admins").select("user_id").eq("user_id",user.id).maybeSingle();
+    if(adminError||!adminRow){await voteClient.auth.signOut();throw new Error("Akun ini belum terdaftar sebagai admin voting.")}
+    syncAdminUI(true);adminStatus("Login admin berhasil. Kamu dapat mengumumkan pemenang resmi.");
+    profileUser=user;renderMyRoleBadge(await isDeveloper(user.id));
+    const {data:ownProfile}=await voteClient.from("user_profiles").select("display_name,avatar_url").eq("id",user.id).maybeSingle();
+    if(ownProfile){document.getElementById("profileDisplayName").value=ownProfile.display_name||"KAAI USER";profileAvatarUrl=ownProfile.avatar_url||null;if(profileAvatarUrl)document.getElementById("profileAvatarPreview").src=profileAvatarUrl}
+    await loadPublicProfiles();
+  }catch(error){adminStatus("Login gagal: "+(error?.message||"Periksa email dan password."))}finally{submit.disabled=false}
+});
+document.getElementById("announceWinnerBtn").addEventListener("click",async()=>{
+  if(!voteClient)return;const winnerId=Number(voteWinnerSelect.value);const message=document.getElementById("voteWinnerText").value.trim();const button=document.getElementById("announceWinnerBtn");button.disabled=true;
+  try{const {error}=await voteClient.rpc("announce_voting_winner",{p_winner_option_id:winnerId,p_message:message});if(error)throw error;adminStatus("Pemenang resmi berhasil diumumkan.");await loadAnnouncement()}
+  catch(error){adminStatus("Gagal mengumumkan pemenang: "+(error?.message||"Periksa hak akses admin."))}finally{button.disabled=false}
+});
+document.getElementById("voteAdminLogout").addEventListener("click",async()=>{await voteClient.auth.signOut();syncAdminUI(false);adminStatus("Admin sudah logout.");profileUser=null;renderMyRoleBadge(false);await initProfile()});
+
+// === HIDDEN GLOBAL ANNOUNCEMENTS: owner-only secret access ===
+let brandTapCount=0, brandTapTimer=null;
+document.querySelector(".brand")?.addEventListener("click",async(e)=>{
+  brandTapCount++;
+  clearTimeout(brandTapTimer);
+  brandTapTimer=setTimeout(()=>{brandTapCount=0},2200);
+  if(brandTapCount<5)return;
+  brandTapCount=0;
+  e.preventDefault();
+  const section=document.getElementById("global-announcement");
+  if(!voteClient){return}
+  const {data:{session}}=await voteClient.auth.getSession();
+  const allowed=!!(session?.user&&!session.user.is_anonymous&&session.user.id===KAAI_DEVELOPER_USER_ID&&await isDeveloper(session.user.id));
+  if(!allowed){accountAuthStatus("Akses command rahasia hanya untuk Developer.");return}
+  section.hidden=!section.hidden;
+  if(!section.hidden){section.scrollIntoView({behavior:"smooth",block:"start"});announcementStatus("Panel rahasia terbuka. Hanya akun Developer dapat publish.")}
+});
+// === OWNER-ONLY GLOBAL ANNOUNCEMENTS ===
+let announcementSeenIds=new Set();
+let announcementFirstLoad=true;
+function showAnnouncementPopup(row){const backdrop=document.getElementById("announcementPopupBackdrop");if(!backdrop||!row)return;document.getElementById("announcementPopupTitle").textContent=row.title||"Pengumuman terbaru";document.getElementById("announcementPopupMessage").textContent=row.message||"";document.getElementById("announcementPopupDate").textContent="✦ DEVELOPER • "+new Date(row.created_at).toLocaleString("id-ID")+(row.expires_at?" • Berakhir "+new Date(row.expires_at).toLocaleString("id-ID"):" • Tidak kedaluwarsa");backdrop.hidden=false;document.body.style.overflow="hidden";}
+function closeAnnouncementPopup(){const backdrop=document.getElementById("announcementPopupBackdrop");if(backdrop)backdrop.hidden=true;document.body.style.overflow=""}
+document.getElementById("announcementPopupClose")?.addEventListener("click",closeAnnouncementPopup);
+document.getElementById("announcementPopupOk")?.addEventListener("click",closeAnnouncementPopup);
+document.getElementById("announcementPopupBackdrop")?.addEventListener("click",e=>{if(e.target===e.currentTarget)closeAnnouncementPopup()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeAnnouncementPopup()});
+function announcementSound(){try{const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;const ctx=new AC();const now=ctx.currentTime;[660,880].forEach((freq,i)=>{const osc=ctx.createOscillator(),gain=ctx.createGain();osc.type="sine";osc.frequency.value=freq;gain.gain.setValueAtTime(0.0001,now+i*.13);gain.gain.exponentialRampToValueAtTime(.12,now+i*.13+.025);gain.gain.exponentialRampToValueAtTime(.0001,now+i*.13+.19);osc.connect(gain);gain.connect(ctx.destination);osc.start(now+i*.13);osc.stop(now+i*.13+.2)});setTimeout(()=>ctx.close().catch(()=>{}),700)}catch(e){console.debug("Announcement sound unavailable",e)}}
+function announcementStatus(t){const el=document.getElementById("globalAnnouncementStatus");if(el)el.textContent=t}
+async function loadGlobalAnnouncements(){if(!voteClient)return;try{const {data,error}=await voteClient.from("global_announcements").select("id,title,message,created_at,expires_at").order("created_at",{ascending:false}).limit(20);if(error)throw error;const feed=document.getElementById("globalAnnouncementFeed");const now=Date.now();const rows=(data||[]).filter(r=>!r.expires_at||new Date(r.expires_at).getTime()>now);if(!rows.length){feed.innerHTML='<div class="announcement-empty">Belum ada pengumuman resmi.</div>';announcementFirstLoad=false;return}const fresh=rows.filter(r=>!announcementSeenIds.has(String(r.id)));rows.forEach(r=>announcementSeenIds.add(String(r.id)));feed.replaceChildren();rows.forEach(r=>{const card=document.createElement("article");card.className="announcement-card";const label=document.createElement("div");label.className="vote-small";label.textContent="✦ OFFICIAL ANNOUNCEMENT";const title=document.createElement("h3");title.textContent=r.title;const msg=document.createElement("p");msg.textContent=r.message;const date=document.createElement("small");date.textContent="✦ DEVELOPER • "+new Date(r.created_at).toLocaleString("id-ID")+(r.expires_at?" • Berakhir "+new Date(r.expires_at).toLocaleString("id-ID"):" • Tidak kedaluwarsa");card.append(label,title,msg,date);feed.append(card)});if(announcementFirstLoad){showAnnouncementPopup(rows[0]);announcementFirstLoad=false}else if(fresh.length){showAnnouncementPopup(fresh[0]);announcementSound()}}catch(e){document.getElementById("globalAnnouncementFeed").innerHTML='<div class="announcement-empty">Pengumuman belum terhubung. Jalankan SQL setup pengumuman di Supabase.</div>';console.warn("Global announcements:",e.message)}}
+async function syncAnnouncementAdmin(){const box=document.getElementById("globalAnnouncementAdmin");if(!box||!voteClient)return;const {data:{session}}=await voteClient.auth.getSession();const allowed=!!(session?.user&&!session.user.is_anonymous&&session.user.id===KAAI_DEVELOPER_USER_ID&&await isDeveloper(session.user.id));box.hidden=!allowed;if(allowed)announcementStatus("Developer terverifikasi. Hanya akun pemilik dapat publish.")}
+document.getElementById("globalAnnouncementPublish")?.addEventListener("click",async()=>{const title=document.getElementById("globalAnnouncementTitle").value.trim(),message=document.getElementById("globalAnnouncementMessage").value.trim(),durationValue=Number(document.getElementById("globalAnnouncementDurationValue").value),durationUnit=document.getElementById("globalAnnouncementDurationUnit").value,button=document.getElementById("globalAnnouncementPublish");if(!title||!message){announcementStatus("Isi judul dan pesan terlebih dahulu.");return}if(durationUnit!=="forever"&&(!Number.isFinite(durationValue)||durationValue<1||!Number.isInteger(durationValue))){announcementStatus("Masukkan durasi berupa angka bulat minimal 1.");return}const durationMs=durationUnit==="minutes"?durationValue*60000:durationUnit==="hours"?durationValue*3600000:durationUnit==="days"?durationValue*86400000:0;if(durationUnit!=="forever"&&durationMs>31536000000){announcementStatus("Durasi maksimal 365 hari.");return}button.disabled=true;try{const {data:{session}}=await voteClient.auth.getSession();if(!session?.user||session.user.id!==KAAI_DEVELOPER_USER_ID||!await isDeveloper(session.user.id))throw new Error("Akses ditolak. Login Developer terlebih dahulu.");const expires_at=durationUnit==="forever"?null:new Date(Date.now()+durationMs).toISOString();const {error}=await voteClient.from("global_announcements").insert({author_id:session.user.id,title,message,expires_at});if(error)throw error;document.getElementById("globalAnnouncementTitle").value="";document.getElementById("globalAnnouncementMessage").value="";announcementStatus("Pengumuman berhasil dipublikasikan.");await loadGlobalAnnouncements()}catch(e){announcementStatus("Gagal publish: "+(e.message||"Periksa SQL/RLS Supabase."))}finally{button.disabled=false}});
+
+if(supabaseConfigured()){
+  voteClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
+  voteClient.auth.onAuthStateChange((event,session)=>{if(session?.user){updateAccountAuthUI(session.user);if(!session.user.is_anonymous){profileUser=session.user}}});
+  initProfile();
+  startGlobalChat();
+  loadVoteOptions().then(async()=>{const {data:{session}}=await voteClient.auth.getSession();if(session&&!session.user.is_anonymous){const {data:adminRow}=await voteClient.from("voting_admins").select("user_id").eq("user_id",session.user.id).maybeSingle();if(adminRow){syncAdminUI(true);adminStatus("Sesi admin aktif.")}}}).catch(err=>voteStatus("Gagal menghubungkan Supabase: "+(err?.message||"unknown error")));
+}else{
+  voteStatus("Voting belum terhubung. Isi SUPABASE_URL dan SUPABASE_PUBLISHABLE_KEY di bagian konfigurasi script.");
+  voteListEl.innerHTML='<div class="vote-card"><h3>Supabase belum dikonfigurasi</h3><p>Buka bagian KAAI PROJECT VOTING di akhir script dan masukkan Project URL serta Publishable Key.</p></div>';
+}
+
+</script>
+
+<style>
+/* KAAA Project — YouTube player only */
+#kaaiYoutubeLauncher{position:fixed;top:14px;right:14px;z-index:2147483000;width:48px;height:48px;border:3px solid #171717;background:#f5d547;color:#171717;box-shadow:4px 4px #171717;font-size:20px;font-weight:900;cursor:pointer;display:grid;place-items:center}
+#kaaiYoutubeOverlay[hidden]{display:none!important}
+#kaaiYoutubeOverlay{position:fixed;inset:0;z-index:2147483001;background:rgba(0,0,0,.72);display:flex;align-items:center;justify-content:center;padding:18px;box-sizing:border-box}
+#kaaiYoutubePanel{width:min(440px,100%);max-height:85vh;overflow:auto;background:#fff8df;color:#171717;border:3px solid #171717;box-shadow:8px 8px #f5d547;padding:20px;box-sizing:border-box}
+#kaaiYoutubePanel header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
+#kaaiYoutubePanel h2{font-size:23px;letter-spacing:-1px;color:#171717}
+#kaaiYoutubeClose,#kaaiYoutubePlay,#kaaiYoutubeSearch{border:2px solid #171717;background:#f5d547;color:#171717;padding:11px;font-weight:900;cursor:pointer}
+#kaaiYoutubeUrl{width:100%;box-sizing:border-box;padding:13px;border:3px solid #171717;background:#fff;color:#171717;outline:none;margin:10px 0}
+#kaaiYoutubePlay,#kaaiYoutubeSearch{width:100%;padding:13px;box-shadow:4px 4px #171717}
+.kaai-youtube-status{font-size:12px;line-height:1.6;color:#555;margin:14px 0;overflow-wrap:anywhere}
+.kaai-youtube-player{width:100%;aspect-ratio:16/9;background:#111;border:3px solid #171717;margin-top:12px;overflow:hidden}
+.kaai-youtube-player iframe{display:block;width:100%;height:100%;border:0}
+#kaaiYoutubeSearch{margin-top:12px;background:#fff}
+@media(max-width:540px){#kaaiYoutubeLauncher{top:10px;right:10px;width:43px;height:43px}}
+</style>
+<button id="kaaiYoutubeLauncher" type="button" aria-label="Buka YouTube Player" title="YouTube Player">▶</button>
+<div id="kaaiYoutubeOverlay" hidden>
+  <section id="kaaiYoutubePanel" role="dialog" aria-modal="true" aria-labelledby="kaaiYoutubeTitle">
+    <header><div><div class="vote-small">KAAA PROJECT / MEDIA</div><h2 id="kaaiYoutubeTitle">YOUTUBE PLAYER</h2></div><button id="kaaiYoutubeClose" type="button" aria-label="Tutup">✕</button></header>
+    <p style="font-size:12px;line-height:1.6;color:#555">Tempel link video YouTube, Shorts, atau youtu.be untuk menontonnya langsung di sini.</p>
+    <input id="kaaiYoutubeUrl" type="url" inputmode="url" placeholder="https://www.youtube.com/watch?v=..." autocomplete="url">
+    <button id="kaaiYoutubePlay" type="button">PUTAR VIDEO ▶</button>
+    <div id="kaaiYoutubeStatus" role="status" class="kaai-youtube-status">Masukkan link video YouTube.</div>
+    <div id="kaaiYoutubePlayer" class="kaai-youtube-player" hidden></div>
+    <button id="kaaiYoutubeSearch" type="button">CARI DI YOUTUBE ↗</button>
+  </section>
+</div>
+<script>
+(()=>{
+ const launcher=document.getElementById('kaaiYoutubeLauncher'),overlay=document.getElementById('kaaiYoutubeOverlay');
+ const close=document.getElementById('kaaiYoutubeClose'),input=document.getElementById('kaaiYoutubeUrl');
+ const play=document.getElementById('kaaiYoutubePlay'),status=document.getElementById('kaaiYoutubeStatus');
+ const player=document.getElementById('kaaiYoutubePlayer'),search=document.getElementById('kaaiYoutubeSearch');
+ const open=()=>{overlay.hidden=false;document.body.style.overflow='hidden';setTimeout(()=>input.focus(),30)};
+ const shut=()=>{overlay.hidden=true;document.body.style.overflow='';player.replaceChildren();player.hidden=true};
+ launcher.addEventListener('click',open);close.addEventListener('click',shut);
+ overlay.addEventListener('click',e=>{if(e.target===overlay)shut()});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!overlay.hidden)shut()});
+ function normalizeUrl(raw){let value=raw.trim();if(!value)return null;if(!/^https?:\/\//i.test(value))value='https://'+value;const url=new URL(value);if(!['http:','https:'].includes(url.protocol))throw new Error('Hanya URL HTTP/HTTPS yang diizinkan.');return url}
+ function extractId(raw){
+   const url=normalizeUrl(raw);if(!url)return null;
+   const host=url.hostname.toLowerCase().replace(/^www\./,'').replace(/^m\./,'');let id='';
+   if(host==='youtu.be')id=url.pathname.split('/').filter(Boolean)[0]||'';
+   else if(['youtube.com','music.youtube.com','youtube-nocookie.com'].includes(host)){
+     if(url.pathname==='/watch')id=url.searchParams.get('v')||'';
+     else{const parts=url.pathname.split('/').filter(Boolean);if(['shorts','embed','live','v'].includes(parts[0]))id=parts[1]||'';}
+   }else throw new Error('Masukkan link dari youtube.com atau youtu.be.');
+   if(!/^[A-Za-z0-9_-]{11}$/.test(id))throw new Error('ID video tidak ditemukan. Pastikan link video valid.');return id;
+ }
+ play.addEventListener('click',()=>{
+   player.replaceChildren();player.hidden=true;
+   try{const id=extractId(input.value);if(!id){status.textContent='Masukkan link video YouTube.';return}
+     const frame=document.createElement('iframe');frame.src='https://www.youtube-nocookie.com/embed/'+encodeURIComponent(id)+'?playsinline=1&rel=0';
+     frame.title='YouTube video player';frame.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+     frame.allowFullscreen=true;frame.referrerPolicy='strict-origin-when-cross-origin';frame.loading='lazy';
+     player.append(frame);player.hidden=false;status.textContent='Video siap diputar. Tekan tombol Play pada pemutar.';
+   }catch(error){status.textContent=error.message||'Link YouTube tidak valid.'}
+ });
+ input.addEventListener('keydown',e=>{if(e.key==='Enter')play.click()});
+ search.addEventListener('click',()=>window.open('https://www.youtube.com/results?search_query='+encodeURIComponent(input.value.trim()),'_blank','noopener,noreferrer'));
+})();
+</script>
+
+
+
+<nav id="kaaiGlassNav" aria-label="Floating navigation">
+  <a href="#home" class="active" data-glass-target="home"><span class="glass-icon" aria-hidden="true">⌂</span><span>Home</span></a>
+  <a href="#games" data-glass-target="games"><span class="glass-icon" aria-hidden="true">▦</span><span>Projects</span></a>
+  <button type="button" id="kaaiGlassSettings" aria-label="Ganti tema gelap atau terang"><span class="glass-icon" aria-hidden="true">◐</span><span>Settings</span></button>
+  <button type="button" id="kaaiGlassProfile" aria-haspopup="true" aria-expanded="false"><span class="glass-icon" aria-hidden="true">◎</span><span>Profile</span></button>
+</nav>
+<script id="kaaiGlassNavScript">
+(function(){
+  const nav=document.getElementById('kaaiGlassNav');
+  if(!nav)return;
+  const links=[...nav.querySelectorAll('a[data-glass-target]')];
+  links.forEach(link=>link.addEventListener('click',()=>{
+    links.forEach(item=>item.classList.toggle('active',item===link));
+  }));
+  const settings=document.getElementById('kaaiGlassSettings');
+  settings.addEventListener('click',()=>{
+    const root=document.documentElement;
+    const next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+    if(typeof window.setTheme==='function') window.setTheme(next);
+    else {
+      root.setAttribute('data-theme',next);
+      try{localStorage.setItem('kaai-project-theme',next)}catch(e){}
+    }
+  });
+  if('IntersectionObserver' in window){
+    const observer=new IntersectionObserver(entries=>{
+      const visible=entries.filter(entry=>entry.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+      if(!visible)return;
+      links.forEach(link=>link.classList.toggle('active',link.dataset.glassTarget===visible.target.id));
+    },{rootMargin:'-25% 0px -55% 0px',threshold:[0,.15,.35,.6]});
+    ['home','games','profile'].forEach(id=>{const el=document.getElementById(id);if(el)observer.observe(el)});
+  }
+})();
+</script>
+
+
+<div id="kaaiProfilePanel" role="menu" aria-label="Profile menu">
+ <div class="profile-head"><div class="profile-title">KAAA Community</div><div class="profile-sub">Connect with KAAA PROJECT</div></div>
+ <button type="button" role="menuitem" class="profile-open" id="bizOpen"><span class="profile-symbol">☺</span><span>Profil Bisnis</span></button>
+ <a role="menuitem" href="https://whatsapp.com/channel/0029Vb8UAO4ATRSkXrMk9i0k" target="_blank" rel="noopener noreferrer"><span class="profile-symbol">◉</span><span>WhatsApp Channel</span></a>
+ <a role="menuitem" href="https://www.tiktok.com/@kaa.vk0" target="_blank" rel="noopener noreferrer"><span class="profile-symbol">♪</span><span>TikTok Profile</span></a>
+ <a role="menuitem" href="https://chronoprojects.com/verify" target="_blank" rel="noopener noreferrer"><span class="profile-symbol">✓</span><span>Chrono UID Verify</span></a>
+ <a role="menuitem" href="https://core.chronoprojects.com/chrono/register" target="_blank" rel="noopener noreferrer"><span class="profile-symbol">＋</span><span>Buat Account</span></a>
+</div>
+
+<div id="bizSheet" role="dialog" aria-modal="true" aria-labelledby="bizNameText" aria-hidden="true"><div class="biz-col">
+ <div class="biz-cover"><svg id="bizMap" viewBox="0 0 400 210" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg><button type="button" class="biz-back" id="bizClose" aria-label="Tutup profil"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 5l-7 7 7 7"/></svg></button><button type="button" class="biz-editbtn" id="bizEditBtn">Edit profil</button></div>
+ <img class="biz-avatar" id="bizAvatar" src="https://placehold.co/300x300/f7df55/171717?text=K" alt="Foto profil" onerror="this.onerror=null;this.src='https://placehold.co/300x300/f7df55/171717?text=K'">
+ <h2 class="biz-name" id="bizNameText">KAAI USER</h2>
+ <div id="bizView"></div>
+ <form id="bizForm" class="biz-form" hidden>
+  <label class="biz-photo" for="bizFile">Ganti foto</label><input id="bizFile" type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden>
+  <label for="biz_display_name">Nama tampilan</label><input id="biz_display_name" maxlength="32" type="text" autocomplete="off"><label for="biz_username">Username</label><input id="biz_username" maxlength="32" type="text" autocomplete="off"><label for="biz_category">Kategori</label><input id="biz_category" maxlength="80" type="text" autocomplete="off"><label for="biz_address">Alamat</label><input id="biz_address" maxlength="160" type="text" autocomplete="off"><label for="biz_website">Website</label><input id="biz_website" maxlength="200" type="text" autocomplete="off"><label for="biz_email">Email</label><input id="biz_email" maxlength="120" type="text" autocomplete="off"><label for="biz_description">Deskripsi</label><textarea id="biz_description" maxlength="500" rows="4"></textarea>
+  <p class="biz-hint">Semua isian di profil ini terlihat oleh pengunjung lain. Jangan isi data yang ingin kamu rahasiakan.</p>
+  <div class="biz-actions"><button type="button" class="biz-ghost" id="bizCancel">Batal</button><button type="submit" class="biz-save" id="bizSave">Simpan</button></div>
+  <p class="biz-status" id="bizStatus" role="status" aria-live="polite"></p>
+ </form>
+</div></div>
+<script id="kaaiProfilePanelScript">
+(function(){
+ const trigger=document.getElementById('kaaiGlassProfile'),panel=document.getElementById('kaaiProfilePanel');
+ if(!trigger||!panel)return;
+ function close(){panel.classList.remove('open');trigger.setAttribute('aria-expanded','false')}
+ trigger.addEventListener('click',function(e){e.stopPropagation();const open=!panel.classList.contains('open');panel.classList.toggle('open',open);trigger.setAttribute('aria-expanded',String(open))});
+ panel.addEventListener('click',e=>e.stopPropagation());
+ document.addEventListener('click',close);
+ document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+})();
+</script>
+
+<script id="bizSheetScript">
+(function(){
+ const $=id=>document.getElementById(id),sheet=$('bizSheet'),openBtn=$('bizOpen');
+ if(!sheet||!openBtn)return;
+ const ICON={"at": "<svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"3.5\"/><path d=\"M15.5 12v1.5a2.5 2.5 0 0 0 5 0V12a8.5 8.5 0 1 0-3.3 6.7\"/></svg>", "cat": "<svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 3l3.5 6h-7z\"/><circle cx=\"7\" cy=\"17\" r=\"3.5\"/><rect x=\"14\" y=\"13.5\" width=\"7\" height=\"7\" rx=\"1\"/></svg>", "pin": "<svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z\"/><circle cx=\"12\" cy=\"9.5\" r=\"2.5\"/></svg>", "globe": "<svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18\"/></svg>", "mail": "<svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"3\" y=\"5\" width=\"18\" height=\"14\" rx=\"2\"/><path d=\"M3 7l9 6 9-6\"/></svg>", "store": "<svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9l1.5-5h13L20 9M4 9v11h16V9M4 9c0 2.5 3.5 2.5 4 0 .5 2.5 3.5 2.5 4 0 .5 2.500 3.500 2.500 4 0 .5 2.500 4 2.500 4 0M9 20v-5h6v5\"/></svg>"},PH='https://placehold.co/300x300/f7df55/171717?text=K';
+ const ROWS=[['username','at','Username'],['category','cat','Kategori'],['address','pin','Alamat'],['website','globe','Website'],['email','mail','Email'],['description','store','Deskripsi']];
+ const KEYS=['display_name'].concat(ROWS.map(r=>r[0]));
+ const panel=$('kaaiProfilePanel'),trigger=$('kaaiGlassProfile'),form=$('bizForm'),view=$('bizView'),editBtn=$('bizEditBtn'),status=$('bizStatus');
+ let data={},newAvatar=null,busy=false;
+ const say=t=>{status.textContent=t};
+ const safeUrl=v=>{try{const u=new URL(/^https?:\/\//i.test(v)?v:'https://'+v);return /^https?:$/.test(u.protocol)?u.href:null}catch(e){return null}};
+ const map=['     xxxxx        xxxx   xxxxxxxxxxx   ','   xxxxxxxxxx    xxxxxx xxxxxxxxxxxxxxx ','  xxxxxxxxxxx     xxxxx  xxxxxxxxxxxxxxx','   xxxxxxxxx    xxxxxxxxx xxxxxxxxxxxxxx ','    xxxxxxx     xxxxxxxxx  xxxxxxxxxxx   ','     xxxxx       xxxxxxx    xxxxxxxxx    ','      xxx         xxxxxx     xxx   xx    ','      xxxx        xxxxx             xxxx ','       xxxx       xxxx             xxxxxx','       xxx         xx               xxxx '];
+ let dots='';map.forEach((row,y)=>[...row].forEach((c,x)=>{if(c==='x')dots+='<circle cx="'+(x*10+5)+'" cy="'+(y*13+42)+'" r="2.6" fill="#d8dde1" opacity="'+(.55+((x*7+y*3)%5)*.1)+'"/>'}));
+ $('bizMap').innerHTML=dots;
+ function render(){
+  $('bizNameText').textContent=data.display_name||'KAAI USER';
+  $('bizAvatar').src=data.avatar_url||PH;
+  view.replaceChildren();let n=0;
+  ROWS.forEach(([k,ic,label])=>{const v=(data[k]||'').trim();if(!v)return;n++;
+   const row=document.createElement('div');row.className='biz-row';row.innerHTML=ICON[ic]+'<div><div class="biz-val"></div><div class="biz-lab"></div></div>';
+   const val=row.querySelector('.biz-val');row.querySelector('.biz-lab').textContent=label;
+   if(k==='website'&&safeUrl(v)){const a=document.createElement('a');a.href=safeUrl(v);a.target='_blank';a.rel='noopener noreferrer';a.textContent=v;val.append(a)}
+   else if(k==='email'&&v.includes('@')){const a=document.createElement('a');a.href='mailto:'+v;a.textContent=v;val.append(a)}
+   else val.textContent=v;
+   view.append(row)});
+  if(!n){const p=document.createElement('p');p.className='biz-empty';p.textContent='Profilmu masih kosong. Tekan Edit profil untuk menambahkan username, kategori, alamat, website, email, dan deskripsi.';view.append(p)}
+ }
+ async function load(){
+  data={display_name:($('profileDisplayName').value||'').trim()||'KAAI USER',avatar_url:profileAvatarUrl||null};
+  render();
+  if(!voteClient||!profileUser)return;
+  const {data:row,error}=await voteClient.from('user_profiles').select('*').eq('id',profileUser.id).maybeSingle();
+  if(!error&&row){data=Object.assign(data,row);render()}
+ }
+ function mode(edit){form.hidden=!edit;view.hidden=edit;editBtn.hidden=edit;sheet.scrollTop=0;
+  if(edit){KEYS.forEach(k=>$('biz_'+k).value=data[k]||'');say('');newAvatar=null;$('bizFile').value='';$('biz_display_name').focus()}else{newAvatar=null;$('bizAvatar').src=data.avatar_url||PH}}
+ function open(){panel.classList.remove('open');trigger.setAttribute('aria-expanded','false');mode(false);sheet.classList.add('open');sheet.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';$('bizClose').focus();load()}
+ function shut(){if(!sheet.classList.contains('open'))return;sheet.classList.remove('open');sheet.setAttribute('aria-hidden','true');document.body.style.overflow='';trigger.focus()}
+ openBtn.addEventListener('click',open);$('bizClose').addEventListener('click',shut);
+ document.addEventListener('keydown',e=>{if(e.key==='Escape')shut()});
+ editBtn.addEventListener('click',()=>{if(!voteClient||!profileUser){data.display_name=data.display_name||'KAAI USER'}mode(true);if(!voteClient||!profileUser)say('Profil belum terhubung ke Supabase. Perubahan belum bisa disimpan.')});
+ $('bizCancel').addEventListener('click',()=>mode(false));
+ $('bizFile').addEventListener('change',e=>{const f=e.target.files&&e.target.files[0];if(!f)return;
+  if(f.size>3*1024*1024){say('Ukuran foto melebihi 3 MB.');e.target.value='';return}
+  if(!/^image\/(png|jpeg|webp|gif)$/.test(f.type)){say('Pilih foto PNG, JPG, WEBP, atau GIF.');e.target.value='';return}
+  newAvatar=f;$('bizAvatar').src=URL.createObjectURL(f);say('Foto dipilih. Tekan Simpan untuk menyimpan.')});
+ form.addEventListener('submit',async e=>{e.preventDefault();if(busy)return;
+  if(!voteClient||!profileUser){say('Profil belum terhubung ke Supabase.');return}
+  const v=k=>$('biz_'+k).value.trim(),web=v('website'),mail=v('email');
+  if(web&&!safeUrl(web)){say('Website tidak valid.');return}
+  if(mail&&!/^\S+@\S+\.\S+$/.test(mail)){say('Email tidak valid.');return}
+  busy=true;$('bizSave').disabled=true;$('bizSave').textContent='Menyimpan…';
+  try{
+   let avatar=data.avatar_url||null;
+   if(newAvatar){const ext=({'image/jpeg':'jpg','image/png':'png','image/webp':'webp','image/gif':'gif'})[newAvatar.type]||'jpg',path=profileUser.id+'/avatar.'+ext;
+    const {error:upErr}=await voteClient.storage.from('avatars').upload(path,newAvatar,{upsert:true,contentType:newAvatar.type,cacheControl:'3600'});if(upErr)throw upErr;
+    avatar=voteClient.storage.from('avatars').getPublicUrl(path).data.publicUrl+'?v='+Date.now()}
+   const payload={id:profileUser.id,display_name:v('display_name')||'KAAI USER',avatar_url:avatar,username:v('username').replace(/\s+/g,'')||null,category:v('category')||null,address:v('address')||null,website:web?safeUrl(web):null,email:mail||null,description:v('description')||null,updated_at:new Date().toISOString()};
+   const {error}=await voteClient.from('user_profiles').upsert(payload,{onConflict:'id'});if(error)throw error;
+   data=Object.assign(data,payload);profileAvatarUrl=avatar;
+   $('profileDisplayName').value=payload.display_name;if(avatar)$('profileAvatarPreview').src=avatar;
+   if(typeof loadPublicProfiles==='function')loadPublicProfiles();
+   mode(false);render();
+  }catch(err){const m=err&&err.message||'Periksa koneksi.';say(/column|schema/i.test(m)?'Gagal menyimpan: kolom profil belum ada di Supabase. Jalankan SQL setup profil lebih dulu.':'Gagal menyimpan: '+m)}
+  finally{busy=false;$('bizSave').disabled=false;$('bizSave').textContent='Simpan'}
+ });
+})();
+</script>
+</body></html>
